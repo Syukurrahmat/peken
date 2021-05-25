@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <base href="/">
+</head>
+<body>
+    <nav>
+        <div class="container flex-between">
+            <div class="webName flex-left">
+                <img src="img/plant.svg" width="35"  alt="">
+                <h3>PEKEN</h3>
+            </div>
+            <input type="text" name="search" placeholder="Cari sayur dan buah segar berkualitas">
+            
+            <div class="flex-right">
+                <div class=" flex-right" >
+                    <p class="sumCart"></p>
+                    <div class="cart">
+                        <img src="img/cart.svg"  height="20" alt="">
+                        <span></span>
+                    </div>
+                </div>
+                <button class="button-soft">login</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <main>
+            <div class="category">
+                <p>Kategori : </p>
+                <a href=""><div class="button-round">Semua</div></a>
+                <a href=""><div class="button-round">Buah</div></a>
+                <a href=""><div class="button-round">Sayur</div></a>
+            </div>
+            <div class="flex-between">
+                <h3>BUAH</h3>
+                <div class="flex-right">
+                    <img src="img/sort-down.svg" height="15" alt="">
+
+                    <div class="select"  tabindex="-1">
+                        <div class="flex-between button-select" onclick="openSelect(event)">
+                            <input type="text" id="arrangeInput" disabled=true value="Paling sesuai" >
+                            <img src="img/arrow-close.svg" height="6" alt="">
+                        </div>
+                        <div class="option">
+                            <div>Paling sesuai</div>
+                            <div>Harga Terendah</div>
+                            <div>Harga Tertinggi</div>
+                            <div>A - Z</div>
+                            <div>Z - A</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <article>
+                <div class="box-product">
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section>
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                        </a>
+                        <div class="labelProduct">
+                            <div class="nameProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                            </div>
+                            <div class="bawah flex-between">
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                </div>
+            </article>
+
+          
+
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+
+<script src="script/script.js"></script>
+<script src="script/product.js"></script>
+</body>
+</html>
