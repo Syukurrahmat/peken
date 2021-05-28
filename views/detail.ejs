@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <base href="/">
 </head>
 <body>
     <nav>
         <div class="container flex-between">
-            <a class="webName flex-left" href="/">
+            <div class="webName flex-left">
                 <img src="img/plant.svg" width="35"  alt="">
                 <h3>PEKEN</h3>
-            </a>
+            </div>
             <form action="/search" method="GET">
                 <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" >
             </form>
@@ -27,42 +27,52 @@
                         <span></span>
                     </div>
                 </div>
-                <button class="button-soft" onclick="modal()">login</button>
+                <button class="button-soft" onclick="modal()"><%= username %> </button>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <main>
-            <header class="flex-between">
-                <h1>BELANJA BUAH DAN SAYUR PILIHAN DENGAN KUALITAS SEGAR DAN HARGA TERJANGKAU</h1>
-                <img src="img/fruit-vege.svg" alt="">
-            </header>
-            <article>
-                <h4>Produk kami</h4>
-                <div class="box-category">
-                    <a href="/g/buah">
-                        <section class="category">
-                            <h3>Buah</h3>
-                            <img src="img/fresh-fruits.png" height="130" alt="">
-                        </section>
-                    </a>
-                    <a href="/g/sayur">
-                        <section class="category">
-                            <h3>Sayur</h3>
-                            <img src="img/vegetables-basket.png" height="145" alt="">
-                        </section>
-                    </a>
-                    <a href="/g/all">
-                        <section class="category">
-                            <h3>Semua</h3>
-                            <img src="img/vegetables-fruits.png" height="135" alt="">
-                        </section>
-                    </a>
-               </div>
+
+            <article class="flex-between-top display-product"  >
+                <div class="image-box">
+                    <img src="image-data/<%= JSON.parse(data.image).file %>" height="500" alt="">
+                </div>
+                <div class="right">
+                    <section class="product-b" data-id=28 data-stock ='20'>
+                        <div class="top">
+                            <div class="farm"><%= data.farm %></div>
+                            <h1><%= data.productName %></h1>
+                            <p class="note"><%= data.note %></p>
+                        </div>
+                        <div class="bottom">
+                            <p class="price"><%= data.price %> <span>/ <%= data.units %></span></p>
+                            <div class="flex-left">
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                </div>
+                                <p class="stock">tersisa <%= data.stock %> <%= data.units %></p>
+                              
+
+                            </div>
+                            
+                        </div>
+                    </section>
+                    <div class="description">
+                        <h4>Deskripsi Produk</h4>
+                        <p><%= data.description %></p>
+                    </div>
+
+                </div>
             </article>
-            <article>
-                <h4>Produk Pilihan</h4>
+            <article class="relateProduct">
+                <h4>Produk terkait</h4>
                 <div class="box-product">
                     <section class="product">
                         <a href="">
@@ -203,6 +213,6 @@
     </footer>
 
 <script src="script/script.js"></script>
-<script src="script/home.js"></script>
+<script src="script/detail.js"></script>
 </body>
 </html>

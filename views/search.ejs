@@ -16,7 +16,7 @@
                 <a href="/"><h3>PEKEN</h3></a>
             </div>
             <form action="/search" method="GET">
-                <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" >
+                <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" value= '<%= key %>''  >
             </form>
             <div class="flex-right">
                 <div class=" flex-right" >
@@ -26,24 +26,18 @@
                         <span></span>
                     </div>
                 </div>
-
-
                 <button class="button-soft" onclick="modal()"><%= username %> </button>
             </div>
         </div>
     </nav>
 
-
     <div class="container">
         <main>
-            <div class="ctgr">
-                <p>Kategori : </p>
-                <a href="/g/buah"><div class="button-litle">Buah</div></a>
-                <a href="/g/sayur"><div class="button-litle">Sayur</div></a>
-                <a href="/g/all"><div class="button-litle">Semua</div></a>
-            </div>
-            <div class="flex-between">
-                <h3><%= key %> </h3>
+            <div class="flex-between-top ">
+                <div>
+                    <h3>Hasil Pencarian</h3>
+                    <p class="litle-p">Hasil pencarian untuk Produk <%= key  %> </p>
+                </div>
                 <div class="flex-right">
                     <img src="img/sort-down.svg" height="15" alt="">
 
@@ -67,7 +61,7 @@
 
 
             <article>
-                <div class="box-product">
+                <div class="box-product" >
                     <section class="product">
                         <a href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
@@ -569,7 +563,8 @@
                         </div>
                     </section> 
                 </div>
-                <div class="button more" onclick="more()">Lebih Banyak</div>
+                <div class="button more" onclick="more()" >Lebih Banyak</div>
+        
             </article>
 
           

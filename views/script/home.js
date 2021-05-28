@@ -25,8 +25,8 @@ async function initTopProduct(){
         element[2].innerHTML = data[i].note
         element[3].innerHTML = price
 
-        if(data[i].oncart) addCart(element[4],data[i].oncart)
-        setTimeout(()=>unloading(e),500)
+        if(data[i].oncart) addCart(element[4],data[i].oncart,true)
+        setTimeout(()=>unloading(e),i*100)
     });
 
     

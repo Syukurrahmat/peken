@@ -1,11 +1,20 @@
 const { raw } = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('peken', 'root', '', {
-    host: 'localhost',
+// let shema = 'peken'
+// let username  = 'root'
+// let password = ''
+// let host = 'localhost'
+let shema = 'heroku_475b4e555ae400e'
+let username  = 'b01b5fa34784f1'
+let password = '39feac2a'
+let host = 'us-cdbr-east-03.cleardb.com'
+
+const sequelize = new Sequelize(shema, username, password, {
+    host: host,
     dialect:'mysql',
     logging: false,
-    query:raw,
+    // query:raw,
     
 });
 
