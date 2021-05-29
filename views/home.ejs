@@ -20,14 +20,14 @@
             </form>
             
             <div class="flex-right">
-                <div class=" flex-right" >
-                    <p class="sumCart"></p>
-                    <div class="cart">
+                <a href="/cart" class="cartbox flex-right" >
+                    <p class="sumCart"><%= totHarga %></p>
+                    <div class="cart" >
                         <img src="img/cart.svg"  height="20" alt="">
-                        <span></span>
+                        <span><%= count %></span>
                     </div>
-                </div>
-                <button class="button-soft" onclick="modal()">login</button>
+                </a>
+                <button class="button-soft" onclick="modal()"><%= username %> </button>
             </div>
         </div>
     </nav>

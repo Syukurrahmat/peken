@@ -265,6 +265,7 @@ header{
 .cart-n{
     width: 100%;
     display: none;
+
 }
 .cart-n div{
     width: 20px;
@@ -306,7 +307,13 @@ footer{
     height: 50px;
     background-color: var(--hijau);
 }
-
+.cartbox{
+    padding: 2px 10px 2px 0;
+    border-radius: 5px;
+}
+.cartbox:hover{
+    background-color:#f5f4f4;
+}
 .cart{
     position: relative;
     cursor: pointer;
@@ -314,7 +321,7 @@ footer{
 .sumCart{
     font-size: 14px;
     font-weight: 500;
-    width: 115px;
+    width: 100px;
     text-align: right;
 }
 .cart span {
@@ -325,7 +332,7 @@ footer{
     width: 15px;
     height: 15px;
     text-align: center;
-    line-height: 15px;
+    line-height: 18px;
     border-radius: 5px;
     right: -6px;
     bottom: 0;
@@ -333,6 +340,15 @@ footer{
 }
 .cart span:empty{
     visibility: hidden;
+}
+.box-product-cart > *{
+    margin: 20px 0;
+
+}
+.product-c{
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: column; */
 }
 
 input::-webkit-outer-spin-button,
@@ -425,8 +441,9 @@ input[type=number]:focus{
 }
 .product-b .farm{
     font-weight: 600;
-    font-size: 15px;
+    font-size: 14px;
     width: max-content;
+    color: var(--hitam);
 
 }
 .product-b h1{
@@ -460,6 +477,8 @@ input[type=number]:focus{
     display: block;
 }
 
+
+
 .product-b .cart-n{
     display: none;
 
@@ -478,7 +497,6 @@ input[type=number]:focus{
     font-size: 16px;
     width: 70px;
     border-radius: 5px ;
-    background-color:ghostwhite;
 
 }
 .description {
@@ -490,6 +508,7 @@ input[type=number]:focus{
     padding-top: 5px;
     font-size: 1.07em;
     line-height: 18px;
+    /* margin-top: 15px; */
 }
 
 .ctgr{
@@ -568,8 +587,8 @@ input[type=number]:focus{
 }
 .loading {
     display: block;
-    color: rgba(255, 255, 255, 0);
-    border: none;
+    color: rgba(255, 255, 255, 0) !important;
+    border: none !important;
     animation: placeHolderShimmer 1s linear infinite forwards;
     background:  #f6f7f8;
     background:  linear-gradient(to right,  #eeeeee 8%,  #dddddd 18%,  #eeeeee 33%);
@@ -577,11 +596,14 @@ input[type=number]:focus{
     height:  initial;
     position:  relative;
     pointer-events: none;
+    cursor: not-allowed;
 }
 
-.loading img{
+.loading *{
+    opacity: 0;
     visibility: hidden;
 }
+
 
 .empty{
     margin: 45px auto;

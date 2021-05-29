@@ -20,10 +20,10 @@
             </form>
             <div class="flex-right">
                 <div class=" flex-right" >
-                    <p class="sumCart"></p>
+                    <p class="sumCart"><%= (totHarga!=0)?totHarga : ''%> </p>
                     <div class="cart">
                         <img src="img/cart.svg"  height="20" alt="">
-                        <span></span>
+                        <span><%= (count!=0)? count : '' %> </span>
                     </div>
                 </div>
 

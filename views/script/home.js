@@ -1,4 +1,4 @@
-loading()
+// loading()
 
 initTopProduct()
 async function initTopProduct(){

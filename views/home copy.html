@@ -15,19 +15,9 @@
             <a class="webName flex-left" href="/">
                 <img src="img/plant.svg" width="35"  alt="">
                 <h3>PEKEN</h3>
-            </a>
-            <form action="/search" method="GET">
-                <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" >
-            </form>
-            
+                <p> | Keranjang saya</p>
+            </a>            
             <div class="flex-right">
-                <div class=" flex-right" >
-                    <p class="sumCart"></p>
-                    <div class="cart">
-                        <img src="img/cart.svg"  height="20" alt="">
-                        <span></span>
-                    </div>
-                </div>
                 <button class="button-soft">login</button>
             </div>
         </div>
@@ -35,39 +25,41 @@
 
     <div class="container">
         <main>
-            <header class="flex-between">
-                <h1>BELANJA BUAH DAN SAYUR PILIHAN DENGAN KUALITAS SEGAR DAN HARGA TERJANGKAU</h1>
-                <img src="img/fruit-vege.svg" alt="">
-            </header>
+            <p># 20 item ada di keranjang anda </p>
             <article>
-                <h4>Produk kami</h4>
-                <div class="box-category">
-                    <a href="/g/buah">
-                        <section class="category">
-                            <h3>Buah</h3>
-                            <img src="img/fresh-fruits.png" height="130" alt="">
-                        </section>
-                    </a>
-                    <a href="/g/sayur">
-                        <section class="category">
-                            <h3>Sayur</h3>
-                            <img src="img/vegetables-basket.png" height="145" alt="">
-                        </section>
-                    </a>
-                    <a href="/g/all">
-                        <section class="category">
-                            <h3>Semua</h3>
-                            <img src="img/vegetables-fruits.png" height="135" alt="">
-                        </section>
-                    </a>
-               </div>
-            </article>
-            <article>
-                <h4>Produk Pilihan</h4>
-                <div class="box-product">
-                    <section class="product">
+                <div class="box-product-cart">
+                    <section class="product-c">
+                        <div class="flex-left">
+                            <a href="">
+                                <img src="image-data/default-placeholder.png" height="130" class="productImage" alt="">
+                            </a>
+                            <div class="labelProduct">
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit.</p>
+                                </a>
+                                <p class="note">Lorem, ipsum.</p>
+                                <p class="price" data-sum=0>Rp 000.000</p>
+                            </div>
+                        </div>
+                        
+                            <div class="nameProduct">
+                            </div>
+                            <div class="bawah flex-between">
+                                <div class="cart-p">
+                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                    <div class="cart-n flex-between">
+                                        <div>-</div>
+                                        <input type="number" value=0>
+                                        <div>+</div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </section> 
+                    <section class="product-c">
                         <a href="">
-                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                            <img src="image-data/default-placeholder.png" height="130" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
@@ -90,9 +82,9 @@
                             </div>
                         </div>
                     </section> 
-                    <section class="product">
+                    <section class="product-c">
                         <a href="">
-                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                            <img src="image-data/default-placeholder.png" height="130" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
@@ -115,9 +107,9 @@
                             </div>
                         </div>
                     </section> 
-                    <section class="product">
+                    <section class="product-c">
                         <a href="">
-                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                            <img src="image-data/default-placeholder.png" height="130" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
@@ -140,34 +132,9 @@
                             </div>
                         </div>
                     </section> 
-                    <section class="product">
+                    <section class="product-c">
                         <a href="">
-                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
-                        </a>
-                        <div class="labelProduct">
-                            <div class="nameProduct">
-                                <a href="">
-                                    <p class="name">Lorem ipsum dolor sit.</p>
-                                </a>
-                                <p class="note">Lorem, ipsum.</p>
-                            </div>
-                            <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
-                                    <button class="button " onclick="addCart(this)" >+ keranjang</button>
-                                    <div class="cart-n flex-between">
-                                        <div>-</div>
-                                        <input type="number" value=0>
-                                        <div>+</div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </section> 
-                    <section class="product">
-                        <a href="">
-                            <img src="image-data/default-placeholder.png" class="productImage" alt="">
+                            <img src="image-data/default-placeholder.png" height="130" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">

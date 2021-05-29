@@ -39,72 +39,98 @@ app.use(flash());
 
 
 
-app.get('/',(req,res)=>{
-    res.render('home')
+app.get('/', async(req,res)=>{
+
+
+    res.render('home', await begin(req) )
 })
-app.get('/search',(req,res)=>{
+app.get('/search', async(req,res)=>{
     let key = req.query.key
     if(key==undefined) return res.redirect('/')
 
-    let sortInputList = {'price-asc':'Harga Terendah','price-desc':'Harga Tertinggi','abjad-asc':'A - Z','abjad-desc':'Z - A'}
-    
-    let sortInput = (req.query.sortby)? sortInputList[req.query.sortby] : 'Paling sesuai'
-
-    let username = (req.isAuthenticated())? req.user.name : 'login'
-    res.render('search',{ key , username , sortInput})
+    res.render('search',{ ...await begin(req), ...{ key}})
 })
 
 app.get('/d/product-:id',async (req,res)=>{
     
-   
     let data =  await Products.findOne({ where: { id : req.params.id }})
-   
-    
-    res.render('detail',{data})
+    if(!data) res.redirect('/')
+
+    res.render('detail',await begin(req))
 })
 
 
-app.get('/g/:any',(req,res)=>{
+app.get('/g/:any', async(req,res)=>{
     let validation = {'buah':'buah' ,'sayur':'sayur', 'all':'semua' }
     let key = validation[req.params.any]
     if(key===undefined) return res.status(404).send('Not found');
-    let sortInputList = {'price-asc':'Harga Terendah','price-desc':'Harga Tertinggi','abjad-asc':'A - Z','abjad-desc':'Z - A'}
-    
-    let sortInput = (req.query.sortby)? sortInputList[req.query.sortby] : 'Paling sesuai'
 
-    let username = (req.isAuthenticated())? req.user.name : 'login'
-    res.render('product',{key , username , sortInput})
+
+    res.render('product',{...await begin(req), ...{key}})
 })
 
 app.post('/cart',async (req,res)=>{
     let id = req.body.id
-    console.log('lll')
     let cart = req.cookies['cartLocal'] || {}
-    
     cart[id] = req.body.total
-     
-    
+
     if(!req.isAuthenticated()){
         for (let key of Object.keys(cart)) if(cart[key]=='0') delete cart[key]
-        res.cookie('cartLocal', cart ,{ maxAge: 30*24*60*60*1000, httpOnly: true , secure:true })
+        res.cookie('cartLocal', cart ,{ maxAge: 30*24*60*60*1000 ,httpOnly:true })
     }else{
         res.clearCookie('cartLocal')
         let data =  await Users.findOne({ attributes:['id','cartList'], where: { id : req.user.id }})
         let cartdb = JSON.parse(data.cartList) || {}
-
         cart = Object.assign(cartdb, cart)
         for (let key of Object.keys(cart)) if(cart[key]=='0') delete cart[key]
-        
         data.cartList = cart
         data.save()
     }
 
-    let qr =[]
+    let sc = await sumcart(cart)
     
-    for (let key of Object.keys(cart)) qr.push({'id':Number(key)})
+    res.json({totHarga:sc.totHarga , count:sc.count})
+})
 
+app.get('/detail', async(req,res)=>{
+    let data =  await Products.findAll({ where: { id : req.query.id }})
+    data = setOnCart(req,data)
+    res.json(data[0])
+})
+
+async function begin(req){
+    let username = (req.isAuthenticated())? req.user.name : 'login'
+
+    let cart = (req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal'] || {}
+
+    let sc = await sumcart(cart)
+
+
+    let totHarga = (sc.totHarga==0)? '' : new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"})
+         .format(sc.totHarga)
+         .replace('IRD','Rp.')
+         .replace(',00','')
+
+    let count = (sc.count==0)? '' : sc.count
+
+
+    let sortInputList = {'price-asc':'Harga Terendah','price-desc':'Harga Tertinggi','abjad-asc':'A - Z','abjad-desc':'Z - A'}
+
+    let sortInput = (req.query.sortby)? sortInputList[req.query.sortby] : 'Paling sesuai'
+
+
+    return{ username , totHarga , count, sortInput}
+}
+
+
+
+
+
+async function sumcart(cart){
+
+    let qr =[]
+    for (let key of Object.keys(cart)) qr.push({'id':Number(key)})
     let harga = await Products.findAll({ attributes:['id','price'],where: {[Op.or]: qr}})
-    
     let hargaList = {}
     harga.forEach(e=>{
         let a = Object.values(e)
@@ -113,11 +139,9 @@ app.post('/cart',async (req,res)=>{
 
     let totHarga = 0
     for (let key of Object.keys(cart)) totHarga += cart[key]*hargaList[key]
-    
-
-    res.json({totHarga , count : Object.keys(cart).length})
-})
-
+    let count = Object.keys(cart).length
+    return {totHarga,count}
+}
 
 app.get('/topProduct',async (req,res)=>{
     let data =  await Products.findAll({
@@ -134,8 +158,6 @@ app.get('/topProduct',async (req,res)=>{
 
 
 app.get('/getProduct',async (req,res)=>{
-    // console.log(req.get('Referrer'))
-    console.log(req.query)
 
     let sortValidation = {'none':'none', 'price':'price','abjad':'productName'}
     let orderValidation = ['NONE','DESC','ASC']
@@ -158,7 +180,6 @@ app.get('/getProduct',async (req,res)=>{
     if(category !=='all') whereQuery = {category:category}
     if(key !== undefined && category == 'search')  whereQuery = {productName : { [Op.substring] : key }} 
 
-    console.log(whereQuery)
 
     let orderQuery = (orderConcat == 'none NONE')? sequelize.literal('rand(159)') : sequelize.literal(orderConcat)
 
@@ -191,13 +212,11 @@ function setOnCart(req,data){
 }
 
 app.get('/relateProduct', async(req,res)=>{
-    console.log(req.query.id)
     let id = req.query.id
 
     let name =  await Products.findOne({attributes:['productName'], where: {id}})
     
     let similar = name.productName.split(' ')
-    console.log(similar)
 
     let whereQuery= []
     similar.forEach(e=>{
@@ -233,11 +252,6 @@ app.get('/auth/google/callback',
   function(req, res) {
     res.redirect(req.flash('currentUrl'));
 });
-
-
-
-
-
 
 
 

@@ -1,3 +1,5 @@
+
+
 function addCart(e, dfl = 0 ,begin = false){
     let cart_p = e.parentElement
     cart_p.children[0].style.display = 'none'
@@ -6,6 +8,7 @@ function addCart(e, dfl = 0 ,begin = false){
     let cart = document.querySelector('.sumCart')
     let id = e.closest('section').getAttribute('data-id')
     let stock = e.closest('section').getAttribute('data-stock')
+
     
     let min = cart_p.querySelector('.cart-n div:first-child')
     let number = cart_p.querySelector('.cart-n input')
@@ -45,6 +48,13 @@ function addCart(e, dfl = 0 ,begin = false){
     })
 
     function up(){
+        let cs ={}
+        try{
+            cs = JSON.parse(decodeURIComponent(document.cookie).split(';').filter(e=>e.includes('currentcart'))[0].split('=')[1]) || {}
+        }catch(e){}
+            
+        console.log(cs)
+
         fetch('http://localhost:5000/cart',{
             method: 'POST',
             headers: {
@@ -59,7 +69,7 @@ function addCart(e, dfl = 0 ,begin = false){
 }
 
 function loading(){
-    let selector = 'section a , section p ,section button, section .farm, section h1'
+    let selector = 'section a , section p ,section button, section .farm, section h1 ,.desc'
     let item = document.querySelectorAll(selector)
     item.forEach(el=>el.classList.add('loading'))
 }

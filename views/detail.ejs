@@ -16,15 +16,15 @@
                 <h3>PEKEN</h3>
             </div>
             <form action="/search" method="GET">
-                <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" >
+                <input type="text" name="key" placeholder="Cari sayur dan buah segar berkualitas" autocomplete="off">
             </form>
             
             <div class="flex-right">
                 <div class=" flex-right" >
-                    <p class="sumCart"></p>
+                    <p class="sumCart"><%= (totHarga!=0)?totHarga : ''%> </p>
                     <div class="cart">
                         <img src="img/cart.svg"  height="20" alt="">
-                        <span></span>
+                        <span><%= (count!=0)? count : '' %> </span>
                     </div>
                 </div>
                 <button class="button-soft" onclick="modal()"><%= username %> </button>
@@ -37,17 +37,17 @@
 
             <article class="flex-between-top display-product"  >
                 <div class="image-box">
-                    <img src="image-data/<%= JSON.parse(data.image).file %>" height="500" alt="">
+                    <img src="image-data/default-placeholder.png" class="productImage" height="500" alt="">
                 </div>
                 <div class="right">
-                    <section class="product-b" data-id=28 data-stock ='20'>
+                    <section class="product-b">
                         <div class="top">
-                            <div class="farm"><%= data.farm %></div>
-                            <h1><%= data.productName %></h1>
-                            <p class="note"><%= data.note %></p>
+                            <p class="farm">lorem</p>
+                            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+                            <p class="note">Lorem, ipsum.</p>
                         </div>
                         <div class="bottom">
-                            <p class="price"><%= data.price %> <span>/ <%= data.units %></span></p>
+                            <p class="price">Rp. 000.000<span>/lorem</span></p>
                             <div class="flex-left">
                                 <div class="cart-p">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
@@ -57,16 +57,14 @@
                                         <div>+</div>
                                     </div>
                                 </div>
-                                <p class="stock">tersisa <%= data.stock %> <%= data.units %></p>
-                              
-
+                                <p class="stock">00 lorem</p>
                             </div>
                             
                         </div>
                     </section>
                     <div class="description">
-                        <h4>Deskripsi Produk</h4>
-                        <p><%= data.description %></p>
+                        <h4 class="desc">Deskripsi Produk</h4>
+                        <p class="desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam vero fuga, a repudiandae obcaecati, quos libero architecto error iusto ullam corrupti perferendis debitis ducimus optio explicabo eum? Totam, quisquam optio.</p>
                     </div>
 
                 </div>
