@@ -10,14 +10,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "form-data": "^4.0.0",
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "sequelize": "^6.6.2"
+    "querystring": "^0.2.1",
+    "randomstring": "^1.2.1",
+    "request": "^2.88.2",
+    "sequelize": "^6.6.2",
+    "string-similarity": "^4.0.4"
   }
 }

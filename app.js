@@ -1,3 +1,4 @@
+var qs = require("querystring");
 const express       = require('express')
 const path          = require('path')
 const session	    = require('express-session');
@@ -6,18 +7,22 @@ const cookieParser  =  require('cookie-parser')
 const bodyParser    = require('body-parser')
 const passport		= require('passport');
 const flash         = require('connect-flash');
-
 const port          = process.env.PORT || 5000;
-const {Products,sequelize, Users} = require('./config/db')
+const {Products,sequelize, Users ,Order} = require('./config/db')
 const { Op, or, where } = require("sequelize");
+const axios = require('axios');
+const stringSimilarity = require("string-similarity");
+const randomstring = require("randomstring");
 
+var FormData = require('form-data');
 const {isLoggedIn, isLoggedOut} = require('./config/passport');
+
 
 app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser())
 app.use(express.json());
 
@@ -69,6 +74,144 @@ app.get('/g/:any', async(req,res)=>{
     res.render('product',{...await begin(req), ...{key}})
 })
 
+app.get('/cart',(req,res)=>{
+    
+    res.render('cart',{username:(req.isAuthenticated())? req.user.name : 'login'})
+})
+app.get('/checkout', async (req,res)=>{
+    
+    
+    res.render('checkout',{username:(req.isAuthenticated())? req.user.name : 'login' , address : (req.user.address)? JSON.parse(req.user.address).strAddress : null})
+})
+
+app.get('/getOngkir',async(req,res)=>{
+    
+    let totHarga = (await sumcart(req)).totHarga
+    if(req.user.address==null) return res.json({error:'Alamat belum ditetapkan' , totHarga})
+    
+    let destination = String(JSON.parse(req.user.address).cityID_RO)
+    
+    let estimatedWeight = {
+        kg : 1000,
+        pcs : 250,
+        pack : 700,
+        sisir : 950, 
+    }
+    let cart = JSON.parse(req.user.cartList)
+    let whereQuery = Object.keys(cart).map(e=>{return {id:e}})
+    let units = await Products.findAll({ attributes:['id','units'] ,where : {[Op.or] : whereQuery }})
+    let weight = 0 
+    
+    units.forEach(e=> weight += cart[e.id] * estimatedWeight[e.units])
+    
+    weight = (weight>30000)? 3000 : weight 
+    
+    let ongkir_res
+    let kurir = ['jne', 'pos' ,'tiki']
+    let i = 0
+    
+    while(true){
+        ongkir_res = await axios({
+            method: 'POST',
+            url: 'https://api.rajaongkir.com/starter/cost',
+            headers: {
+                "key": "2dcea8f7f70b198105982c307cbcdd7b",
+                "content-type": "application/x-www-form-urlencoded",
+            },
+            data : qs.stringify({origin: '427', destination: destination , weight: weight, courier: kurir[i]})
+        }).then(res=>res.data.rajaongkir.results[0].costs)
+        
+        if(ongkir_res.length) break
+        i++
+    }
+    
+    let ongkir = Math.min.apply(Math, ongkir_res.map(e=>e.cost[0].value))
+    let totBayar = ongkir + totHarga
+    
+    res.json({ongkir , totHarga ,  totBayar})
+    
+})
+
+
+
+app.get('/bayar', async(req,res)=>{
+    if(req.user.address==null) return res.json({error:'Mohon isi alamat anda'})
+
+    let medBayar = Object.values(req.query)
+    let validation = {
+        store : ['Indomaret' , 'Alfamart'],
+        'virtual-acc' : ['BRI' , 'BNI', 'BCA', 'Mandiri'],
+    }
+    if(!Object.keys(validation).includes(medBayar[0]) || !validation[medBayar[0]].includes(medBayar[1]) ) return res.json({error:'metode pembayaran tidak valid'})
+    
+    let total = (await sumcart(req)).totHarga
+    let method = (medBayar[0]=='virtual-acc')? 'Virtual Account ' + medBayar[1] : medBayar[1]
+    let payment_code = randomstring.generate({length: 16 ,charset: 'numeric'})
+    let id = randomstring.generate({length: 10, charset: 'numeric'});
+    let deadline = Date.now()+172800000
+    let user = req.user.id
+    let from = JSON.parse(req.user.address).cityID_RO
+
+
+    await Order.create({id, method, total , deadline , payment_code ,user , from})
+
+    let userData =  await Users.findOne({attributes:['id', 'cartList' , 'purchasedList'] ,where: { id : req.user.id }});
+    userData.cartList = {}
+    console.log(userData)
+
+    let purchasedList = JSON.parse(userData.purchasedList) || []
+    purchasedList.push({id , status :false})
+
+    userData.purchasedList = purchasedList
+    userData.save()
+    res.cookie('bayar',id,{maxAge:300000})
+
+    res.contentType('application/json');
+    var data = JSON.stringify('/order/succes/'+id)
+    res.header('Content-Length', data.length);
+    res.end(data);
+})
+
+app.get('/order/succes/:id',async(req,res)=>{
+    let myPurchasedList = Object.values(JSON.parse(req.user.purchasedList).map(e=>e.id))
+    let id = req.params.id
+    if(!myPurchasedList.includes(id) || !req.cookies['bayar']) return res.status(404).send('Not found');
+    console.log(req.cookies['bayar'])
+    
+    if(req.cookies['bayar'] !== id ) return res.status(404).send('Not found');
+
+
+
+    let data = await Order.findOne({where:{id:req.params.id}})
+
+    console.log(data)
+
+
+    res.render('bayar' , {data})
+})
+
+app.get('/cartlist',async(req,res)=>{
+    let cart = ((req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal']) ||{}
+    
+    let whereQuery = []
+    for (let key of Object.keys(cart)){
+        whereQuery.push({id:key})
+    }
+
+    let data = await Products.findAll({
+        attributes:['id','productName', 'image', 'price','stock','units'],
+        where: {
+            [Op.or]: whereQuery
+      }
+    })
+    data = setOnCart(req,data)
+
+    let totHarga = await sumcart(req) 
+
+    res.json({data , totHarga})
+})
+
+
 app.post('/cart',async (req,res)=>{
     let id = req.body.id
     let cart = req.cookies['cartLocal'] || {}
@@ -87,7 +230,7 @@ app.post('/cart',async (req,res)=>{
         data.save()
     }
 
-    let sc = await sumcart(cart)
+    let sc = await sumcart(req , cart)
     
     res.json({totHarga:sc.totHarga , count:sc.count})
 })
@@ -101,9 +244,7 @@ app.get('/detail', async(req,res)=>{
 async function begin(req){
     let username = (req.isAuthenticated())? req.user.name : 'login'
 
-    let cart = (req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal'] || {}
-
-    let sc = await sumcart(cart)
+    let sc = await sumcart(req)
 
 
     let totHarga = (sc.totHarga==0)? '' : new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"})
@@ -126,8 +267,12 @@ async function begin(req){
 
 
 
-async function sumcart(cart){
+async function sumcart(req , data=null){
 
+    let cart = ((req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal']) || {}
+    if(data) cart = data
+  
+    console.log('cart',cart)
     let qr =[]
     for (let key of Object.keys(cart)) qr.push({'id':Number(key)})
     let harga = await Products.findAll({ attributes:['id','price'],where: {[Op.or]: qr}})
@@ -200,7 +345,7 @@ app.get('/getProduct',async (req,res)=>{
 function setOnCart(req,data){
     let iddata = data.map(e=>e.id)
 
-    let oncart = (req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal'] ||{}
+    let oncart = ((req.isAuthenticated())? JSON.parse(req.user.cartList) : req.cookies['cartLocal']) ||{}
 
     for (let key of Object.keys(oncart)){
         let ind = iddata.indexOf(Number(key))
@@ -238,6 +383,74 @@ app.get('/relateProduct', async(req,res)=>{
     res.json({data})
 })
 
+app.post('/setaddress', async (req,res)=>{
+    let {name,hp,provinsi,kabupaten,kecamatan,kelurahan,jalan,postal_code} = req.body
+
+    let url = [ 'provinsi/', 'kota/', 'kecamatan/', 'kelurahan/']
+    ll = [provinsi,kabupaten,kecamatan,kelurahan]
+
+    let strAddress = []
+    for(let i=0;i<4;i++){
+        let ft = await  axios({
+            method: 'GET',
+            url: `https://dev.farizdotid.com/api/daerahindonesia/${url[i]}${ll[i]}`,
+            }).then(res=>res.data.nama)
+        strAddress.unshift(ft)
+    }
+    strAddress= `${name} (${hp}) | ${jalan}, ${strAddress.join(', ')} (${postal_code})`
+    let cityID_RO = await getCityID_RO(kabupaten)
+
+    let update  = await Users.update({ address: {name,hp,provinsi,kabupaten,kecamatan,kelurahan,jalan,strAddress, postal_code , cityID_RO} }, {
+        where: { id : req.user.id }
+    });
+    
+    (update[0])? res.json({status:'success',strAddress}) : res.redirect('/')
+})
+
+// ongkir(1901)
+
+async function getCityID_RO(id){
+
+    let namaKab = await  axios({
+        method: 'GET',
+        url: `https://dev.farizdotid.com/api/daerahindonesia/kota/${id}`,
+        }).then(res=>res.data.nama)
+        
+
+   
+    let allKab = await  axios({
+        method: 'GET',
+        url: `https://api.rajaongkir.com/starter/city`,
+        headers: {key: '2dcea8f7f70b198105982c307cbcdd7b'}
+        }).then(res=> res.data.rajaongkir.results);
+        
+    allKab = allKab.map(e=>{
+        return {id : e.city_id, name : e.type+' '+e.city_name}
+    })
+
+
+    
+    let objKab_id = {}
+    
+    allKab.forEach(e=>{
+        let arr = Object.values(e)
+        objKab_id[arr[1]]=arr[0]
+    })
+
+    
+    let sim = stringSimilarity.findBestMatch(namaKab, allKab.map(e=>e.name)).bestMatch.target
+
+
+    let kab_id  = objKab_id[sim]
+
+    return kab_id
+}
+
+
+
+
+
+
 app.get('/login',(req,res)=>{
     req.flash('currentUrl',req.headers.referer)
     res.redirect('/auth/google')
@@ -252,6 +465,10 @@ app.get('/auth/google/callback',
   function(req, res) {
     res.redirect(req.flash('currentUrl'));
 });
+
+
+
+
 
 
 

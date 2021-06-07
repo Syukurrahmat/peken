@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+    <nav>
+        <div class="container flex-between">
+            <a class="webName flex-left" href="/">
+                <img src="img/plant.svg" width="35"  alt="">
+                <h3>PEKEN</h3>
+                <p> | Checkout</p>
+            </a>            
+            <div class="flex-right">
+                <button class="button-soft"><%= username %></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="checkoutpage">
+            <div class="alamatsection">
+                <div>
+                    <div class="flex-between">
+                        <h4>Alamat Pengiriman</h4>
+                        <p class="editAlamat">Ubah</p>
+                    </div>
+                    <p class="alamatdisp"><%= (address)? address : 'tidak ada alamat tersimpan' %></p>
+                </div>
+                
+            </div>
+            <article class="checkoutlist">
+                <div class="box-product-cart ">
+                    <section class="product-c flex-left">
+                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div>
+                            <p class="name">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                        </div>
+                    </section>
+                    <section class="product-c flex-left">
+                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div>
+                            <p class="name">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                        </div>
+                    </section>
+                    <section class="product-c flex-left">
+                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div>
+                            <p class="name">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                        </div>
+                    </section>
+                    <section class="product-c flex-left">
+                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div>
+                            <p class="name">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                        </div>
+                    </section>
+
+                </div>
+
+            
+            </article>
+                <div class="checkout">
+                    <div class=rincianBay>
+
+                        <h4>Rincian Pembayaran</h4>
+                        <div class="flex-between">
+                            <p>Total Belanja</p>
+                            <b>Rp.23.000</b>
+                        </div>
+                        <div class="flex-between">
+                            <p>Ongkos Kirim</p>
+                            <b>Rp.23.000</b>
+                        </div>
+                        <div class="flex-between">
+                            <p>Total Pembayaran</p>
+                            <b>Rp.23.000</b>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <h4>Metode pembayaran</h4>
+                        <form action="" onsubmit="bayar(this);return false" class="medBayar">
+                            <div>
+                                <div class=" flex-between">
+                                    <label for="store">
+                                        <b>Convenience Store</b>
+                                        <p>Alfamart, Indomaret</p>
+                                    </label>
+                                    <input type="radio" name="medBayar" id="store" value="store" required>
+                                    
+                                </div>
+                                <div class="pilih">
+                                    <select name="store">
+                                        <option value="" disabled selected hidden>Silakan Pilih</option>
+                                        <option value="Alfamart">Alfamart</option>
+                                        <option value="Indomaret">Indomaret</option>
+                                    </select>
+                                    <div class="ket">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo reiciendis mollitia enim facilis, odit veniam consequatur aspernatur reprehenderit non facere! Atque dignissimos non minus exercitationem dicta nulla eius consectetur accusantium.
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class=" flex-between">
+                                    <label for="virtual-acc">
+                                        <b>Virtual Account</b>
+                                        <p>BRI, BCA, MANDIRI, BNI </p>
+                                    </label>
+                                    <input type="radio" name="medBayar" id="virtual-acc" value="virtual-acc">
+                                </div>
+                                <div class="pilih">
+                                    <select name="virtual-acc">
+                                        <option value="" disabled selected hidden>Silakan Pilih</option>
+                                        <option value="BNI">BNI</option>
+                                        <option value="BRI">BRI</option>
+                                        <option value="BCA">BCA</option>
+                                        <option value="Mandiri">Mandiri</option>
+                                    </select>
+                                    <div class="ket">
+                                  
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" class="button" style="margin-top: 20px; width: 100%;" value='BAYAR RP.10000000'>
+                        </form>
+
+                    </div>
+            </div>
+    
+            
+            
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+
+<script src="script/script.js"></script>
+<script src="script/checkout.js"></script>
+</body>
+</html>

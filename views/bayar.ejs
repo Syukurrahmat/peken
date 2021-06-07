@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <base href="/">
+
+</head>
+<body>
+    
+    <nav>
+        <div class="container flex-between">
+            <a class="webName flex-left" href="/">
+                <img src="img/plant.svg" width="35"  alt="">
+                <h3>PEKEN</h3>
+            </a>            
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="bayar">
+            <div class="warning">
+                Jangan pernah melakukan pembayaran apa pun ke manapun terkait pemesanan ini. Sebab situs web bukan situs toko online sebenarnya
+            </div>
+            <div>
+                <p>Batas pembayaran</p>
+                <b><%= new Date(data.deadline).toDateString() %></b>
+            </div>
+            
+            <div>
+                <p>Total tagihan</p>
+                <b>Rp. <%= data.total %> </b>
+            </div>
+            <div>
+                <p>Nomor Pesanan</p>
+                <div class="flex-between">
+                    <b><%= data.id %></b>
+                    <b class="salin">Salin</b>
+                </div>
+            </div>
+            <div>
+                <p>Metode Pembayaran</p>
+
+                <div class="flex-between">
+                    <div class="flex-left">
+                        <img src="img/ALFAMART_LOGO_BARU.png" alt="" height="35">
+                        <div>
+                            <b><%= data.method %></b>
+                            <br>
+                            <b style="color: var(--hijau)"> <%= data.payment_code %></b>
+                        </div>
+                    </div>
+                    <b class="salin">Salin</b>
+                </div>
+            </div>
+            <div class="carabayar">
+                Petunjuk pembayaran
+                <div>
+
+                    <b>Pembayaran melslui Alfamart </b>
+                    <ol type="1">
+                        <li>Datang ke salah satu gerai Alfa group terdekat</li>
+                        <li>Beritahu kasir untuk melakukan pembayaran ke Xendit, atau nama bisnis Anda</li>
+                        <li>Tunjukkan kode pembayaran tagihan</li>
+                        <li>Lakukan pembayaran sesuai dengan nominal tagihan</li>
+                        <li>Terima tanda terima sebagai bukti pembayaran</li>
+                    </ol>
+                </div>
+                
+                </div>
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+
+<!-- <script src="script/script.js"></script> -->
+<!-- <script src="script/checkout.js"></script> -->
+</body>
+</html>

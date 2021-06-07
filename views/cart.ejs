@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    
+    <nav>
+        <div class="container flex-between">
+            <a class="webName flex-left" href="/">
+                <img src="img/plant.svg" width="35"  alt="">
+                <h3>PEKEN</h3>
+                <p> | Keranjang saya</p>
+            </a>            
+            <div class="flex-right">
+                <button class="button-soft"><%= username %></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <article class="cartlist">
+                <div class="box-product-cart ">
+                    <section class="product-c flex-between">
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </a>
+                        <div class="flex-between labelProduct">
+                            <div>
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit. lorem</p>
+                                </a>
+                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            </div>
+                            <div class="flex-right">
+                                <div class="closecart" onclick="removecart(this)">
+                                    <img src="img/trash-bin (1).svg" height="18" alt="">
+                                </div>
+                                <div>
+                                    <div class="cart-p flex-right">
+                                        <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                        <div class="cart-n flex-between">
+                                            <div>-</div>
+                                            <input type="number" value=0>
+                                            <div>+</div>
+                                        </div>
+                                    </div>
+                                    <p class="stock">tersedia 12 pcs</p>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </section>
+                    <section class="product-c flex-between">
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </a>
+                        <div class="flex-between labelProduct">
+                            <div>
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit. lorem</p>
+                                </a>
+                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            </div>
+                            <div class="flex-right">
+                                <div class="closecart" onclick="removecart(this)">
+                                    <img src="img/trash-bin (1).svg" height="18" alt="">
+                                </div>
+                                <div>
+                                    <div class="cart-p flex-right">
+                                        <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                        <div class="cart-n flex-between">
+                                            <div>-</div>
+                                            <input type="number" value=0>
+                                            <div>+</div>
+                                        </div>
+                                    </div>
+                                    <p class="stock">tersedia 12 pcs</p>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </section>
+                    <section class="product-c flex-between">
+                        <a href="">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </a>
+                        <div class="flex-between labelProduct">
+                            <div>
+                                <a href="">
+                                    <p class="name">Lorem ipsum dolor sit. lorem</p>
+                                </a>
+                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            </div>
+                            <div class="flex-right">
+                                <div class="closecart" onclick="removecart(this)">
+                                    <img src="img/trash-bin (1).svg" height="18" alt="">
+                                </div>
+                                <div>
+                                    <div class="cart-p flex-right">
+                                        <button class="button " onclick="addCart(this)" >+ keranjang</button>
+                                        <div class="cart-n flex-between">
+                                            <div>-</div>
+                                            <input type="number" value=0>
+                                            <div>+</div>
+                                        </div>
+                                    </div>
+                                    <p class="stock">tersedia 12 pcs</p>
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </section>
+                    
+                </div>
+
+           
+            </article>
+            
+            <div class="flex-between cobx">
+                <div>
+                    <h4  class="cart">Sub Total (<span>23</span> item)</h4>
+                    <p class="sumCart">Rp. 1.000.000</p>
+                </div>
+                <a href="/checkout" class="button">Checkout</a>
+            </div>
+            
+        </main>
+    </div>
+
+    <footer>
+    </footer>
+
+<script src="script/script.js"></script>
+<script src="script/cart.js"></script>
+</body>
+</html>
