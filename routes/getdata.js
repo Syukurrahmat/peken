@@ -91,6 +91,8 @@ module.exports = (app)=>{
     app.get('/cartlist',checkreferrer,async(req,res)=>{
         let cart =  req.user.cartList || {}
         
+if(!Object.keys(cart).length ) return res.json({data:null , totHarga:null})
+
         let data = await Products.findAll({
             attributes:['id','productName', 'image', 'price','stock','units'],
             where: {id :{[Op.or] : Object.keys(cart)}},
