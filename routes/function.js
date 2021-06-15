@@ -62,9 +62,9 @@ function setOnCart(req,data){
     return data
 }
 
-async function getongkir(req,res){
+async function getongkir(req){
     let totHarga = (await sumcart(req)).totHarga
-    if(req.user.address==null) return res.json({error:'Alamat belum ditetapkan' , totHarga})
+    if(req.user.address==null) return {error:'Alamat belum ditetapkan' , totHarga}
     
     let destination = String(req.user.address.cityID_RO)
     
