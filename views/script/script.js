@@ -51,13 +51,15 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
 
     async function up(){
         if(cartlist){
-            let price = e.closest('section').getAttribute('data-price')
-            e.closest('section').querySelector('.price').innerHTML= `${number.value} x ${num2rupiah(price)} = ${num2rupiah(price*number.value)}`
-            checkarticlebox()
-            document.querySelector('.cobx .cart').classList.add('loading')
-            document.querySelector('.cobx .sumCart').classList.add('loading')
-            document.querySelector('.cobx .button').innerHTML = 'Memuat'
-            document.querySelector('.cobx .button').classList.add('cursornone')
+            try{
+                let price = e.closest('section').getAttribute('data-price')
+                e.closest('section').querySelector('.price').innerHTML= `${number.value} x ${num2rupiah(price)} = ${num2rupiah(price*number.value)}`
+                checkarticlebox()
+                document.querySelector('.cobx .cart').classList.add('loading')
+                document.querySelector('.cobx .sumCart').classList.add('loading')
+                document.querySelector('.cobx .button').innerHTML = 'Memuat'
+                document.querySelector('.cobx .button').classList.add('cursornone')
+            }catch(e){}
         }
 
         let ft = await fetch('/cart',{
