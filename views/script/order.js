@@ -26,8 +26,8 @@ async function getdata(){
             box[i].remove()
         }
 
-        if(e.length > 2){
-            for(let j= 0 ; j<e.length-2 ;j++){
+        if(e.length > 1){
+            for(let j= 0 ; j<e.length-1 ;j++){
                 box[i].appendChild(box[i].lastElementChild.cloneNode(true))
             }
         }

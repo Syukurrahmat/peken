@@ -162,15 +162,15 @@ function modal(isi,kelas,cross=true){
 
 function notif(message){
     let notiflain = document.querySelectorAll('.notif')
-    if(notiflain.length) notiflain.forEach(el=>closenotif(el))
-    
+    if(notiflain.length)if(notiflain[notiflain.length-1].innerHTML==message) return
+
     let notif = document.createElement('div')
     notif.classList.add('notif')
     notif.innerHTML = message
 
     document.querySelector('body').appendChild(notif)  
 
-    setTimeout(()=>{closenotif(notif)},3000)
+    setTimeout(()=>{closenotif(notif)},4000)
 
     function closenotif(ell){
         ell.animate([
