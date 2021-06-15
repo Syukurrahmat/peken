@@ -75,7 +75,7 @@ async function alamat(){
 async function savealamat(e){
     e.querySelector('.button').value='Menyimpan ...'
     e.querySelector('.button').disabled = true
-    document.querySelectorAll('.bgmodal , closeModal').forEach(el=>el.classList.add('pointereventnone'))
+    document.querySelectorAll('.bgmodal , .closeModal').forEach(el=>el.classList.add('pointereventnone'))
     
     let data =  Object.fromEntries(new FormData(e).entries())
 
@@ -147,8 +147,9 @@ function bayar(e){
                 e.insertBefore(err, e.lastElementChild);
             }else{
                 e.querySelector('.error').innerText=res.error
+                
             }
-            document.querySelectorAll('.modal, .bgmodal').forEach(el=>el.remove())
+            
             setTimeout(()=>{
                 e.querySelector('.error').remove()
             },10000)
@@ -202,7 +203,8 @@ async function getOngkir(){
     rincian[1].innerText = (!ongkir.error)? num2rupiah(ongkir.ongkir) : ongkir.error
     rincian[2].innerText = (!ongkir.error)? num2rupiah(ongkir.totBayar) : ongkir.error
 
-    document.querySelector('.total').value = 'BAYAR ' + num2rupiah(ongkir.totBayar)
+    document.querySelector('.total').value = (!ongkir.error)? 'BAYAR ' + num2rupiah(ongkir.totBayar) : ongkir.error
+    if(!ongkir.error) document.querySelector('.total').classList.remove('pointereventnone')
 
     rincian.forEach(e=>e.classList.remove('loading'))
 }
