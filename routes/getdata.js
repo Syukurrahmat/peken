@@ -67,8 +67,8 @@ module.exports = (app)=>{
     app.get('/relateProduct',checkreferrer, async(req,res)=>{
         let id = req.query.id
         let name =  await Products.findOne({attributes:['productName'], where: {id}})
-        let similar = name.productName.split(' ')
-    
+        let similar = name.productName.split(' ').filter(e=>e.length>3 && (e !=='sisir' && e !== 'pack') )
+        
         let whereQuery= []
         similar.forEach(e=>{
             if(e.length>3) whereQuery.push({[Op.substring] : e })
@@ -82,7 +82,7 @@ module.exports = (app)=>{
                     { [Op.not]: [{ id: id }]}
                 ],
             },
-            order:sequelize.literal('stock > 0 DESC ,rand(50)'),
+            order:sequelize.literal('stock > 0 DESC'),
             limit: 5,
         }); 
         data = setOnCart(req,data)
