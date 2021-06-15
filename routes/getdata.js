@@ -1,4 +1,4 @@
-const {begin , sumcart , setOnCart} = require('./function')
+const {begin , sumcart , setOnCart,checkreferrer} = require('./function')
 const {Products,sequelize, Users ,Order} = require('../config/db')
 const { Op, or, where } = require("sequelize");
 const axios = require('axios');
@@ -6,13 +6,13 @@ const axios = require('axios');
 
 module.exports = (app)=>{
 
-    app.get('/detail', async(req,res)=>{
+    app.get('/detail', checkreferrer, async(req,res)=>{
         let data =  await Products.findAll({ where: { id : req.query.id }})
         data = setOnCart(req,data)
         res.json(data[0])
     })
     
-    app.get('/topProduct',async (req,res)=>{
+    app.get('/topProduct',checkreferrer, async (req,res)=>{
         let data =  await Products.findAll({
            attribute0s:['id', 'productName', 'image', 'note', 'price','stock'],
            where:{
@@ -31,7 +31,7 @@ module.exports = (app)=>{
     })
     
     
-    app.get('/getProduct',async (req,res)=>{
+    app.get('/getProduct',checkreferrer, async (req,res)=>{
     
         let sortValidation = {'none':'none', 'price':'price','abjad':'productName'}
         let orderValidation = ['NONE','DESC','ASC']
@@ -72,7 +72,7 @@ module.exports = (app)=>{
          res.json({data})
     })
     
-    app.get('/relateProduct', async(req,res)=>{
+    app.get('/relateProduct',checkreferrer, async(req,res)=>{
         let id = req.query.id
     
         let name =  await Products.findOne({attributes:['productName'], where: {id}})
@@ -98,7 +98,7 @@ module.exports = (app)=>{
         data = setOnCart(req,data)
         res.json({data})
     })
-    app.get('/cartlist',async(req,res)=>{
+    app.get('/cartlist',checkreferrer,async(req,res)=>{
         let cart = ((req.isAuthenticated())? req.user.cartList : req.cookies['cartLocal']) ||{}
         
         let whereQuery = []
@@ -119,7 +119,7 @@ module.exports = (app)=>{
         res.json({data , totHarga})
     })
 
-    app.get('/getorders',async(req,res)=>{
+    app.get('/getorders',checkreferrer,async(req,res)=>{
         let data = await Order.findAll({
             where: {user : req.user.id},
             attributes :['id', 'method', 'bayar' , 'deadline' , 'payment_code' , 'status' , 'createdAt'],
@@ -135,7 +135,7 @@ module.exports = (app)=>{
         res.json(data)
     })
 
-    app.get('/getdetailorder:id',async(req,res)=>{
+    app.get('/getdetailorder:id',checkreferrer,async(req,res)=>{
         
         let data = await Order.findOne({
             where: {id : req.params.id },

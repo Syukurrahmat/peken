@@ -1,4 +1,4 @@
-const {begin , sumcart , setOnCart , getCityID_RO , getongkir} = require('./function')
+const {begin , sumcart , setOnCart , getCityID_RO , getongkir, checkreferrer} = require('./function')
 const {Products,sequelize, Users ,Order} = require('../config/db')
 const axios = require('axios');
 const { Op, or, where } = require("sequelize");
@@ -7,7 +7,7 @@ const randomstring = require("randomstring");
 
 module.exports = (app)=>{
 
-    app.post('/cart',async (req,res)=>{
+    app.post('/cart',checkreferrer,async (req,res)=>{
         
         let stock = await Products.findOne({where:{id:req.body.id},attributes:['stock']})
         if(stock.stock == 0) return
@@ -41,7 +41,7 @@ module.exports = (app)=>{
     
     
     
-    app.post('/setaddress', async (req,res)=>{
+    app.post('/setaddress',checkreferrer, async (req,res)=>{
         let {name,hp,provinsi,kabupaten,kecamatan,kelurahan,jalan,postal_code} = req.body
     
         let url = [ 'provinsi/', 'kota/', 'kecamatan/', 'kelurahan/']
@@ -64,11 +64,11 @@ module.exports = (app)=>{
         
         (update[0])? res.json({status:'success',strAddress}) : res.redirect('/')
     })
-    app.get('/getOngkir',async(req,res)=>{
+    app.get('/getOngkir',checkreferrer,async(req,res)=>{
         res.json(await getongkir(req))        
     })
 
-    app.get('/bayar', async(req,res)=>{
+    app.get('/bayar', checkreferrer, async(req,res)=>{
         if(req.user.address==null) return res.json({error:'Mohon isi alamat anda'})
 
         let medBayar = Object.values(req.query)

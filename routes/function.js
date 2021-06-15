@@ -174,6 +174,10 @@ function num2rupiah(number){
      .replace(',00','') || number
  }
 
+function checkreferrer(req,res,next){
+    if( !req.headers.referer || new URL(req.headers.referer).hostname != req.hostname ) return res.redirect('/')
+    return next()
+}
 
 
-module.exports = {begin , sumcart, getCityID_RO, setOnCart , toFullTanggal , getongkir,num2rupiah}
+module.exports = {begin , sumcart, getCityID_RO, setOnCart , toFullTanggal , getongkir,num2rupiah , checkreferrer }
