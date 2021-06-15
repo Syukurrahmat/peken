@@ -55,7 +55,7 @@ module.exports = (app)=>{
         (update[0])? res.json({status:'success',strAddress}) : res.redirect('/')
     })
     app.get('/getOngkir',checkreferrer,async(req,res)=>{
-        res.json(await getongkir(req))        
+        res.json(await getongkir(req,res))        
     })
 
     app.get('/bayar', checkreferrer, async(req,res)=>{
