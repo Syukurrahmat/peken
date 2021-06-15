@@ -36,7 +36,8 @@ module.exports = (app)=>{
         res.render('cart',{username:(req.isAuthenticated())? req.user.username : 'Login'})
     })
     app.get('/checkout',isLoggedIn, async (req,res)=>{
-        if(new URL(req.headers.referer).pathname != '/cart') return res.redirect('/')
+        
+        if( !req.headers.referer || new URL(req.headers.referer).pathname != '/cart' ) return res.redirect('/cart')
 
         res.render('checkout',{
             username:(req.isAuthenticated())? req.user.username : 'Login',

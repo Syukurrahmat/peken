@@ -58,7 +58,7 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
                 document.querySelector('.cobx .cart').classList.add('loading')
                 document.querySelector('.cobx .sumCart').classList.add('loading')
                 document.querySelector('.cobx .button').innerHTML = 'Memuat'
-                document.querySelector('.cobx .button').classList.add('cursornone')
+                document.querySelector('.cobx .button').classList.add('pointereventnone')
             }catch(e){}
         }
 
@@ -76,6 +76,7 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
             cart.innerHTML = num2rupiah(ft.totHarga)
             document.querySelector('.cart span').innerHTML = ft.count
             unloading(document.querySelector('.cobx'))
+            document.querySelector('.cobx .button').innerHTML = 'Checkout'
             document.querySelector('.cobx .button').classList.remove('pointereventnone')
         }catch(e){}
     }

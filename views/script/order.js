@@ -34,17 +34,16 @@ async function getdata(){
         
         box[i].querySelectorAll('section').forEach((section,i)=>{
             if(e[i]==undefined) return section.remove()
-
-            let element = section.querySelectorAll('b , p:not(p:first-child),.button')
-            element[0].innerHTML = e[i].id
-            element[1].innerHTML = isoToDate(e[i].createdAt)
-            element[2].innerHTML = status[e[i].status][0]
-            element[2].className = status[e[i].status][1]
-            element[4].innerHTML = toFullTanggal(e[i].deadline)
-            element[5].innerHTML = e[i].method
-            element[6].innerHTML = e[i].payment_code
-            element[8].innerHTML = num2rupiah(e[i].bayar.totBayar)
-            element[9].setAttribute('data-id' , e[i].id)
+            let element = section.querySelectorAll('b ,p ,.button')
+            element[1].innerHTML = e[i].id
+            element[2].innerHTML = isoToDate(e[i].createdAt)
+            element[4].innerHTML = status[e[i].status][0]
+            element[4].className = status[e[i].status][1]
+            element[6].innerHTML = toFullTanggal(e[i].deadline)
+            element[8].innerHTML = e[i].method
+            element[9].innerHTML = e[i].payment_code
+            element[12].innerHTML = num2rupiah(e[i].bayar.totBayar)
+            element[13].setAttribute('data-id' , e[i].id)
             unloading(section)
         })
 
