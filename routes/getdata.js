@@ -89,15 +89,10 @@ module.exports = (app)=>{
         res.json({data})
     })
     app.get('/cartlist',checkreferrer,async(req,res)=>{
-<<<<<<< HEAD
-        let cart = req.user.cartList || {}
-        
-        if(!Object.keys(cart).length) res.json({data:[] , totHarga:[]})
-=======
+
         let cart =  req.user.cartList || {}
         
-if(!Object.keys(cart).length ) return res.json({data:[], totHarga:[]})
->>>>>>> 2aa08c4a22d411ad8e1d6427a7c49f033c42214c
+        if(!Object.keys(cart).length ) return res.json({data:[], totHarga:[]})
 
         let data = await Products.findAll({
             attributes:['id','productName', 'image', 'price','stock','units'],
