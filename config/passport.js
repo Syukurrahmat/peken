@@ -12,6 +12,7 @@ passport.use(new GoogleStrategy({
     Users.findOrCreate({
         where:{id: profile.id},
         defaults: {
+            username: profile.displayName.split(' ').filter(e=>e.length>3 && e.length<7)[0] || (profile.displayName.split(' ')[0].slice(0,6)) ,
             id:profile.id,
             name : profile.displayName,
             email : profile.emails[0].value,

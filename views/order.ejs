@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Anda | Peken</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/icon.ico">
+</head>
+<body>
+    <nav>
+        <div class="container flex-between">
+            <a class="webName flex-left" href="/">
+                <img src="img/plant.svg" width="35"  alt="">
+                <h3>PEKEN</h3>
+            </a>
+  
+            
+            <div class="flex-right">
+                <a <%- (username=='Login')? "onclick='login()'" :  "href='/cart'" %>  class="cartbox flex-right" >
+                    <p class="sumCart"><%= totHarga %></p>
+                    <div class="cart" >
+                        <img src="img/cart.svg"  height="20" alt="">
+                        <span><%= count %></span>
+                    </div>
+                </a>
+                <button class="button-soft" data-name ="<%= name %>"  onclick=<%= (username=='Login')? 'login()' : `myaccount(this)` %>><%= username %> </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main>
+            <div class="flex-between atasorder">
+                <h2>Pesanan Saya</h2>
+                <div class="flex-right totpes">
+                    <p>Belum dibayar : <span class="yellowBox">0</span></p>
+                    <p>Sudah dibayar : <span class="greenBox">0</span></p>
+                    <p>Pesanan dibatalkan : <span class="redBox">0</span></p>
+                </div>
+            </div>
+            <div class="pesananbox">
+                <div class="belumbayar">
+                    <h4>Pesanan yang belum dibayar</h4>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                   
+                </div>
+                <div class="sudahbayar">
+                    <h4>Pesanan selesai dibayar</h4>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                    
+                </div>
+                <div class="kadaluarsabayar">
+                    <h4>Pesanan Dibatalkan</h4>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                    <section class="pesanan ">
+                        <div>
+                            <div>
+                                <p class="loading">Nomor Pesanan</p>
+                                <b class="loading">000000000000</b>
+                                <p class="loading">00 lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Status Pesanan</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <p class="loading">batas pembayaran</p>
+                                <p class="loading">00:00 00 Lorem 0000</p>
+                            </div>
+                            <div>
+                                <p class="loading">Metode pembayaran</p>
+                                <b class="loading">Lorem ipsum</b>
+                                <div class="flex-left">
+                                    <b class="loading">0000000000</b>
+                                    <b class="salin loading" onclick="copy(this)">salin</b>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="loading">Total Pembayaran</p>
+                                <b class="loading">Rp.0000000</b>
+                            </div>
+                        </div>
+                        <div class="flex-right">
+                            <div class="button" onclick="detail(this)">Detail Pesanan</div>
+                        </div>
+                    </section>
+                   
+                </div>
+            </div>
+
+
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container flex-between">
+            <div>
+                <div>
+                    <div class="webName flex-left" href="/">
+                        <img src="img/plant white.svg" width="25"  alt="">
+                        <h3>PEKEN</h3>
+                    </div>
+                    <p>Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</p>
+                </div>
+                <div>
+                    <h4>Ikuti kami</h4>
+                    <div class="flex-left sosmed">
+                        <a href=""><img src="img/bxl-facebook.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/instagram.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/twitter-bird.svg" height="18" alt=""></a>
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h4>Kontak kami</h4>
+                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                    <a href="tel:6287882116939">+62 878 8211 6939</a>
+                    
+                </div>
+
+        </div>
+    </footer>
+
+
+<script src="script/script.js"></script>
+<script src="script/order.js"></script>
+</body>
+</html>

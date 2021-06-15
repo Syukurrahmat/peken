@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <title>Belanja buah dan sayur pilihan | Peken </title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/icon.ico">
 
 </head>
 <body>
@@ -20,22 +21,21 @@
             </form>
             
             <div class="flex-right">
-                <a href="/cart" class="cartbox flex-right" >
+                <a <%- (username=='Login')? "onclick='login()'" :  "href='/cart'" %>  class="cartbox flex-right" >
                     <p class="sumCart"><%= totHarga %></p>
                     <div class="cart" >
                         <img src="img/cart.svg"  height="20" alt="">
                         <span><%= count %></span>
                     </div>
                 </a>
-                <button class="button-soft" onclick="login()"><%= username %> </button>
+                <button class="button-soft" data-name ="<%= name %>"  onclick=<%= (username=='Login')? 'login()' : `myaccount(this)` %>><%= username %> </button>
             </div>
         </div>
     </nav>
-
     <div class="container">
         <main>
             <header class="flex-between">
-                <h1>BELANJA BUAH DAN SAYUR PILIHAN DENGAN KUALITAS SEGAR DAN HARGA TERJANGKAU</h1>
+                <h1>Belanja Buah dan Sayur Pilihan dengan Kualitas Segar dan Harga Terjangkau</h1>
                 <img src="img/fruit-vege.svg" alt="">
             </header>
             <article>
@@ -65,19 +65,19 @@
                 <h4>Produk Pilihan</h4>
                 <div class="box-product">
                     <section class="product">
-                        <a href="">
+                        <a class ='loading' href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit.</p>
                                 </a>
-                                <p class="note">Lorem, ipsum.</p>
+                                <p class="note loading">Lorem, ipsum.</p>
                             </div>
                             <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
+                                <p class="price loading" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p loading">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                     <div class="cart-n flex-between">
                                         <div>-</div>
@@ -90,19 +90,19 @@
                         </div>
                     </section> 
                     <section class="product">
-                        <a href="">
+                        <a class ='loading' href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit.</p>
                                 </a>
-                                <p class="note">Lorem, ipsum.</p>
+                                <p class="note loading">Lorem, ipsum.</p>
                             </div>
                             <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
+                                <p class="price loading" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p loading">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                     <div class="cart-n flex-between">
                                         <div>-</div>
@@ -115,19 +115,19 @@
                         </div>
                     </section> 
                     <section class="product">
-                        <a href="">
+                        <a class ='loading' href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit.</p>
                                 </a>
-                                <p class="note">Lorem, ipsum.</p>
+                                <p class="note loading">Lorem, ipsum.</p>
                             </div>
                             <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
+                                <p class="price loading" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p loading">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                     <div class="cart-n flex-between">
                                         <div>-</div>
@@ -140,19 +140,19 @@
                         </div>
                     </section> 
                     <section class="product">
-                        <a href="">
+                        <a class ='loading' href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit.</p>
                                 </a>
-                                <p class="note">Lorem, ipsum.</p>
+                                <p class="note loading">Lorem, ipsum.</p>
                             </div>
                             <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
+                                <p class="price loading" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p loading">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                     <div class="cart-n flex-between">
                                         <div>-</div>
@@ -165,19 +165,19 @@
                         </div>
                     </section> 
                     <section class="product">
-                        <a href="">
+                        <a class ='loading' href="">
                             <img src="image-data/default-placeholder.png" class="productImage" alt="">
                         </a>
                         <div class="labelProduct">
                             <div class="nameProduct">
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit.</p>
                                 </a>
-                                <p class="note">Lorem, ipsum.</p>
+                                <p class="note loading">Lorem, ipsum.</p>
                             </div>
                             <div class="bawah flex-between">
-                                <p class="price" data-sum=0>Rp 000.000</p>
-                                <div class="cart-p">
+                                <p class="price loading" data-sum=0>Rp 000.000</p>
+                                <div class="cart-p loading">
                                     <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                     <div class="cart-n flex-between">
                                         <div>-</div>
@@ -190,6 +190,7 @@
                         </div>
                     </section> 
                     
+                    
                 </div>
            
             </article>
@@ -200,6 +201,33 @@
     </div>
 
     <footer>
+        <div class="container flex-between">
+            <div>
+                <div>
+                    <div class="webName flex-left" href="/">
+                        <img src="img/plant white.svg" width="25"  alt="">
+                        <h3>PEKEN</h3>
+                    </div>
+                    <p>Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</p>
+                </div>
+                <div>
+                    <h4>Ikuti kami</h4>
+                    <div class="flex-left sosmed">
+                        <a href=""><img src="img/bxl-facebook.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/instagram.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/twitter-bird.svg" height="18" alt=""></a>
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h4>Kontak kami</h4>
+                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                    <a href="tel:6287882116939">+62 878 8211 6939</a>
+                    
+                </div>
+
+        </div>
     </footer>
 
 <script src="script/script.js"></script>

@@ -1,4 +1,3 @@
-loading()
 getProduct(0,20,true)
 
 async function getProduct(offset,many,begin=false){
@@ -7,6 +6,12 @@ async function getProduct(offset,many,begin=false){
     let queryCheck = new URLSearchParams(window.location.search)
     let sort = (queryCheck.get('sortby'))? queryCheck.get('sortby') : 'none-none'
     let key = (queryCheck.get('key'))? queryCheck.get('key') : 'none'
+
+    if(key=='none'){
+        window.document.title = `Aneka ${(category=='all')? 'buah dan sayur' : category} pilihan | Peken`
+    }else{
+        window.document.title = `Hasil pencarian ${key} | Peken`
+    }
 
     let data = await fetch(`http://localhost:5000/getProduct?c=${category}&offset=${offset}&many=${many}&sortby=${sort}&key=${key}`).then(res=>res.json()).then(res=>res.data)
     
@@ -31,23 +36,24 @@ async function getProduct(offset,many,begin=false){
         e.setAttribute('data-id',data[i].id)
         e.setAttribute('data-stock',data[i].stock)
 
-        let element = e.querySelectorAll(".productImage,p,button")
-        let link = e.querySelectorAll('a')
-
-        link.forEach(e=>e.setAttribute('href',`/d/product-${data[i].id}`))
-
-        let imgFile = JSON.parse(data[i].image) 
-        let price = num2rupiah(data[i].price)
-    
-        element[0].setAttribute('src' , `image-data/${imgFile.file}`)
-        element[0].setAttribute('alt' , imgFile.alt)
-        element[1].innerHTML = data[i].productName
-        element[2].innerHTML = data[i].note
-        element[3].innerHTML = price
-
-        if(data[i].oncart) addCart(element[4],data[i].oncart,true)
-
-        setTimeout(()=>unloading(e),i*100)
+        let element = e.querySelectorAll("a,.productImage,p,button")
+        
+        element[0].setAttribute('href',`/d/product-${data[i].id}`)
+        element[2].setAttribute('href',`/d/product-${data[i].id}`)
+        element[1].setAttribute('src' , `image-data/${data[i].image.file}`)
+        element[1].setAttribute('alt' , data[i].image.alt)
+        element[3].innerHTML = data[i].productName
+        element[4].innerHTML = data[i].note
+        element[5].innerHTML = num2rupiah(data[i].price)
+        
+        if(data[i].stock<=0)e.classList.add('soldout')
+        if(data[i].oncart) addCart(element[6],data[i].oncart,true)
+        
+        setTimeout(()=>{
+            element[1].classList.toggle('loadimage')
+            setTimeout(()=>element[1].classList.toggle('loadimage'),600)
+            unloading(e)
+        },i*100+200)
     });    
 }
 
@@ -55,35 +61,11 @@ function more(){
     let offset =document.querySelectorAll('.box-product .product').length     
     let box = document.querySelector('.box-product')
     for(let i = 0 ; i<15 ; i++){
-
-    let templet = document.createElement('section')
-    templet.classList.add('product')
-    templet.innerHTML = `
-            <a href="" class='loading' >
-                <img src="image-data/default-placeholder.png" class="productImage loading" alt="Pisang Raja Sereh sisir">
-            </a>
-            <div class="labelProduct">
-                <div class="nameProduct">
-                    <a href="" class="loading">
-                        <p class="name loading">Lorem ipsum dolor sit.</p>
-                    </a>
-                    <p class="note loading">Lorem, ipsum.</p>
-                </div>
-                <div class="bawah flex-between">
-                    <p class="price loading" data-sum="0">Rp 000.000</p>
-                    <div class="cart-p">
-                        <button class="button loading" onclick="addCart(this)">+ keranjang</button>
-                        <div class="cart-n flex-between" >
-                            <div>-</div>
-                            <input type="number" value="0">
-                            <div>+</div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-    `
-        box.appendChild(templet)
+        let br = box.lastElementChild.cloneNode(true)
+        br.querySelector('img').setAttribute('src', "image-data/default-placeholder.png")
+        br.querySelectorAll('a,p,.button').forEach(e=>e.classList.add('loading'))
+        br.classList.remove('soldout')
+        box.appendChild(br)
     }
     getProduct(offset,15)
 }
@@ -94,8 +76,13 @@ function reloadProduct(){
         e.children[1].style.display = 'none'
     })
     let el = document.querySelector('.box-product')
+    el.querySelectorAll('section').forEach(sec=>{
+        sec.classList.remove('soldout')
+        sec.querySelectorAll('a ,p, .button').forEach(elm=>{
+            elm.classList.add('loading')
+        })
+    })
     el.parentNode.replaceChild(el.cloneNode(true), el);
-    loading()
 }
 
 function openSelect(e) {

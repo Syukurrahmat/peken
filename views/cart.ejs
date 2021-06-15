@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <title>Keranjang Anda | Peken</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/icon.ico">
 
 </head>
 <body>
@@ -18,7 +19,7 @@
                 <p> | Keranjang saya</p>
             </a>            
             <div class="flex-right">
-                <button class="button-soft"><%= username %></button>
+                <button class="button-soft" style="cursor:default;"><%= username %></button>
             </div>
         </div>
     </nav>
@@ -28,22 +29,22 @@
             <article class="cartlist">
                 <div class="box-product-cart ">
                     <section class="product-c flex-between">
-                        <a href="">
+                        <a href="" class="loading">
                             <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
                         </a>
                         <div class="flex-between labelProduct">
                             <div>
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit. lorem</p>
                                 </a>
-                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                                <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                             </div>
                             <div class="flex-right">
-                                <div class="closecart" onclick="removecart(this)">
+                                <div class="closecart loading" onclick="removecart(this)">
                                     <img src="img/trash-bin (1).svg" height="18" alt="">
                                 </div>
                                 <div>
-                                    <div class="cart-p flex-right">
+                                    <div class="cart-p loading">
                                         <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                         <div class="cart-n flex-between">
                                             <div>-</div>
@@ -51,29 +52,29 @@
                                             <div>+</div>
                                         </div>
                                     </div>
-                                    <p class="stock">tersedia 12 pcs</p>
+                                    <p class="stock loading">tersedia 12 pcs</p>
                                 </div>
                                     
                             </div>
                         </div>
                     </section>
                     <section class="product-c flex-between">
-                        <a href="">
+                        <a href="" class="loading">
                             <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
                         </a>
                         <div class="flex-between labelProduct">
                             <div>
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit. lorem</p>
                                 </a>
-                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                                <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                             </div>
                             <div class="flex-right">
-                                <div class="closecart" onclick="removecart(this)">
+                                <div class="closecart loading" onclick="removecart(this)">
                                     <img src="img/trash-bin (1).svg" height="18" alt="">
                                 </div>
                                 <div>
-                                    <div class="cart-p flex-right">
+                                    <div class="cart-p loading">
                                         <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                         <div class="cart-n flex-between">
                                             <div>-</div>
@@ -81,29 +82,29 @@
                                             <div>+</div>
                                         </div>
                                     </div>
-                                    <p class="stock">tersedia 12 pcs</p>
+                                    <p class="stock loading">tersedia 12 pcs</p>
                                 </div>
                                     
                             </div>
                         </div>
                     </section>
                     <section class="product-c flex-between">
-                        <a href="">
+                        <a href="" class="loading">
                             <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
                         </a>
                         <div class="flex-between labelProduct">
                             <div>
-                                <a href="">
+                                <a href="" class="loading">
                                     <p class="name">Lorem ipsum dolor sit. lorem</p>
                                 </a>
-                                <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                                <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                             </div>
                             <div class="flex-right">
-                                <div class="closecart" onclick="removecart(this)">
+                                <div class="closecart loading" onclick="removecart(this)">
                                     <img src="img/trash-bin (1).svg" height="18" alt="">
                                 </div>
                                 <div>
-                                    <div class="cart-p flex-right">
+                                    <div class="cart-p loading">
                                         <button class="button " onclick="addCart(this)" >+ keranjang</button>
                                         <div class="cart-n flex-between">
                                             <div>-</div>
@@ -111,7 +112,7 @@
                                             <div>+</div>
                                         </div>
                                     </div>
-                                    <p class="stock">tersedia 12 pcs</p>
+                                    <p class="stock loading">tersedia 12 pcs</p>
                                 </div>
                                     
                             </div>
@@ -125,16 +126,43 @@
             
             <div class="flex-between cobx">
                 <div>
-                    <h4  class="cart">Sub Total (<span>23</span> item)</h4>
-                    <p class="sumCart">Rp. 1.000.000</p>
+                    <h4  class="cart loading">Sub Total (<span>00</span> item)</h4>
+                    <p class="sumCart loading">Rp. 0.000.000</p>
                 </div>
-                <a href="/checkout" class="button">Checkout</a>
+                <a href="/checkout" class="button pointereventnone">Memuat</a>
             </div>
             
         </main>
     </div>
 
     <footer>
+        <div class="container flex-between">
+            <div>
+                <div>
+                    <div class="webName flex-left" href="/">
+                        <img src="img/plant white.svg" width="25"  alt="">
+                        <h3>PEKEN</h3>
+                    </div>
+                    <p>Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</p>
+                </div>
+                <div>
+                    <h4>Ikuti kami</h4>
+                    <div class="flex-left sosmed">
+                        <a href=""><img src="img/bxl-facebook.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/instagram.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/twitter-bird.svg" height="18" alt=""></a>
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h4>Kontak kami</h4>
+                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                    <a href="tel:6287882116939">+62 878 8211 6939</a>
+                    
+                </div>
+
+        </div>
     </footer>
 
 <script src="script/script.js"></script>

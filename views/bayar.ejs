@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <title>Pesanan Berhasil dilakukan | Peken</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
     <base href="/">
+    <link rel="shortcut icon" href="img/icon.ico">
 
 </head>
 <body>
@@ -27,18 +28,18 @@
             </div>
             <div>
                 <p>Batas pembayaran</p>
-                <b><%= new Date(data.deadline).toDateString() %></b>
+                <b><%= deadline %></b>
             </div>
             
             <div>
                 <p>Total tagihan</p>
-                <b>Rp. <%= data.total %> </b>
+                <b><%= bayar %></b>
             </div>
             <div>
                 <p>Nomor Pesanan</p>
                 <div class="flex-between">
-                    <b><%= data.id %></b>
-                    <b class="salin">Salin</b>
+                    <b class="code"><%= data.id %></b>
+                    <b class="salin" onclick="copy(this)">Salin</b>
                 </div>
             </div>
             <div>
@@ -46,38 +47,55 @@
 
                 <div class="flex-between">
                     <div class="flex-left">
-                        <img src="img/ALFAMART_LOGO_BARU.png" alt="" height="35">
+                        <img src="img/<%= data.method %>.jpg" alt="" height="35">
                         <div>
                             <b><%= data.method %></b>
                             <br>
-                            <b style="color: var(--hijau)"> <%= data.payment_code %></b>
+                            <b style="color: var(--hijau)" class="code"> <%= data.payment_code %></b>
                         </div>
                     </div>
-                    <b class="salin">Salin</b>
+                    <b class="salin" onclick="copy(this)">Salin</b>
                 </div>
             </div>
-            <div class="carabayar">
-                Petunjuk pembayaran
-                <div>
+            <div class="flex-right">
+                <a href="/">
+                    <div class="button-soft">kembali ke beranda</div>
+                </a>
+            </div>
 
-                    <b>Pembayaran melslui Alfamart </b>
-                    <ol type="1">
-                        <li>Datang ke salah satu gerai Alfa group terdekat</li>
-                        <li>Beritahu kasir untuk melakukan pembayaran ke Xendit, atau nama bisnis Anda</li>
-                        <li>Tunjukkan kode pembayaran tagihan</li>
-                        <li>Lakukan pembayaran sesuai dengan nominal tagihan</li>
-                        <li>Terima tanda terima sebagai bukti pembayaran</li>
-                    </ol>
-                </div>
-                
-                </div>
         </main>
     </div>
 
     <footer>
+        <div class="container flex-between">
+            <div>
+                <div>
+                    <div class="webName flex-left" href="/">
+                        <img src="img/plant white.svg" width="25"  alt="">
+                        <h3>PEKEN</h3>
+                    </div>
+                    <p>Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</p>
+                </div>
+                <div>
+                    <h4>Ikuti kami</h4>
+                    <div class="flex-left sosmed">
+                        <a href=""><img src="img/bxl-facebook.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/instagram.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/twitter-bird.svg" height="18" alt=""></a>
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h4>Kontak kami</h4>
+                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                    <a href="tel:6287882116939">+62 878 8211 6939</a>
+                    
+                </div>
+
+        </div>
     </footer>
 
-<!-- <script src="script/script.js"></script> -->
-<!-- <script src="script/checkout.js"></script> -->
+<script src="script/script.js"></script>
 </body>
 </html>

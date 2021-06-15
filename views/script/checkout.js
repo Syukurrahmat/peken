@@ -1,4 +1,3 @@
-loading()
 document.querySelector('.editAlamat').addEventListener('click',(e)=>{
     let isi =`
         <div>
@@ -100,6 +99,7 @@ async function savealamat(e){
             e.querySelector('.button').disabled = false
             document.querySelector('.alamatdisp').innerText=res.strAddress
             getOngkir()
+            setTimeout(()=>notif('Alamat baru berhasil disimpan'),400)
         }
     })
     return false
@@ -120,7 +120,6 @@ document.querySelectorAll('.medBayar div input').forEach(inp=>{
         pilih.querySelector('select').required = true
 
         pilih.querySelector('select').onchange=(e)=>{
-            let terpilih = e.target.value
             let ket  = pilih.querySelector('.ket')
             ket.innerHTML=`
                 <ol type="1" style="margin-left:15px">
@@ -134,10 +133,16 @@ document.querySelectorAll('.medBayar div input').forEach(inp=>{
 })
 
 function bayar(e){
+    let isi =`
+    <img src="img/Dual Ring-0.8s-200px.svg" height="120" alt="">
+    <h3>Memproses Pesanan Anda</h3>
+    `
+    modal(isi,'empty',false)
+    
     const query = new URLSearchParams()
     const params = (Object.fromEntries(new FormData(e).entries()))
     Object.keys(params).forEach(key => query.append(key, params[key]));
-    console.log(query.toString())
+
     fetch('/bayar?'+query).then(res=>res.json()).then(res=>{
         if(res.error){
             if(!e.querySelector('.error')){
@@ -153,11 +158,7 @@ function bayar(e){
             },10000)
         }else{
             window.location = res;
-        
         }
-
-        
-
     })
 }
 getProduct()
@@ -170,18 +171,9 @@ async function getProduct(){
     console.log(sum)
     if(data.length>3){
         for(let i = 0 ; i<data.length-3 ; i++){
-            let templet = document.createElement('section')
-            templet.classList.add('product-c')
-            templet.classList.add('flex-left')
-            templet.innerHTML = `
-                <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
-                <div>
-                    <p class="name">Lorem ipsum dolor sit. lorem</p>
-                    <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
-                </div>
-            `
-            document.querySelector('.box-product-cart').appendChild(templet)
-            }
+            let box = document.querySelector('.box-product-cart')
+            box.appendChild(box.lastElementChild.cloneNode(true))
+        }
     }
     let sectionBox = document.querySelectorAll('.box-product-cart .product-c')
     sectionBox.forEach((e,i) => {
@@ -192,14 +184,18 @@ async function getProduct(){
             return
         }
 
-        let element = e.querySelectorAll("a,.productImage,p,.button")
+        let element = e.querySelectorAll(".productImage,p,.button")
         console.log(element)
-        element[0].setAttribute('src' , `image-data/${JSON.parse(data[i].image).file}`)
-        element[0].setAttribute('alt' , JSON.parse(data[i].image).alt)
+        element[0].setAttribute('src' , `image-data/${data[i].image.file}`)
+        element[0].setAttribute('alt' , data[i].image.alt)
         element[1].innerHTML = data[i].productName
         element[2].innerHTML = `${data[i].oncart} x ${num2rupiah(data[i].price)} = ${num2rupiah(data[i].price*data[i].oncart)}`
 
-        setTimeout(()=>unloading(e),i*100)
+        setTimeout(()=>{
+            element[0].classList.toggle('loadimage')
+            setTimeout(()=>element[0].classList.toggle('loadimage'),600)
+            unloading(e)
+        },i*100+200)
     });    
     getOngkir()
 }
@@ -211,6 +207,8 @@ async function getOngkir(){
     rincian[0].innerText = num2rupiah(ongkir.totHarga)
     rincian[1].innerText = (!ongkir.error)? num2rupiah(ongkir.ongkir) : ongkir.error
     rincian[2].innerText = (!ongkir.error)? num2rupiah(ongkir.totBayar) : ongkir.error
+
+    document.querySelector('.total').value = 'BAYAR ' + num2rupiah(ongkir.totBayar)
 
     rincian.forEach(e=>e.classList.remove('loading'))
 }

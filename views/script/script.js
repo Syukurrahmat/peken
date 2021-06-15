@@ -1,15 +1,16 @@
-
-
 function addCart(e, dfl = 0 ,begin = false,cartlist=false){
+    let cart = document.querySelector('.sumCart')
+    let id = e.closest('section').getAttribute('data-id')
+    let stock = e.closest('section').getAttribute('data-stock')
+    
+    if(stock==0) return notif('barang tidak tersedia')
+    
     let cart_p = e.parentElement
     cart_p.children[0].style.display = 'none'
     cart_p.children[1].style.display = 'flex'
 
-    let cart = document.querySelector('.sumCart')
-    let id = e.closest('section').getAttribute('data-id')
-    let stock = e.closest('section').getAttribute('data-stock')
 
-    
+
     let min = cart_p.querySelector('.cart-n div:first-child')
     let number = cart_p.querySelector('.cart-n input')
     let plus = cart_p.querySelector('.cart-n div:last-child')
@@ -23,7 +24,7 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
     function minCart(){
         number.value--
         if(number.value<1) removeCart()
-        up()      
+        if(number.value>=0) up()      
     }
     async function plusCart(){
         if(number.value!=stock){
@@ -53,6 +54,10 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
             let price = e.closest('section').getAttribute('data-price')
             e.closest('section').querySelector('.price').innerHTML= `${number.value} x ${num2rupiah(price)} = ${num2rupiah(price*number.value)}`
             checkarticlebox()
+            document.querySelector('.cobx .cart').classList.add('loading')
+            document.querySelector('.cobx .sumCart').classList.add('loading')
+            document.querySelector('.cobx .button').innerHTML = 'Memuat'
+            document.querySelector('.cobx .button').classList.add('cursornone')
         }
 
         let ft = await fetch('http://localhost:5000/cart',{
@@ -61,19 +66,20 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
                 'Content-Type': 'application/json'
             },
             body : JSON.stringify({'id':id , 'total' : number.value})
-        }).then(res=>res.json())
+        }).then(res=>{
+            notif('Keranjang berhasil diperbarui')  
+            return res.json()
+        })
         try{
             cart.innerHTML = num2rupiah(ft.totHarga)
             document.querySelector('.cart span').innerHTML = ft.count
+            unloading(document.querySelector('.cobx'))
+            document.querySelector('.cobx .button').classList.remove('pointereventnone')
         }catch(e){}
     }
 }
 
-function loading(){
-    let selector = 'section a , section p ,section button, section .farm, section h1 ,.desc ,.rincianBay b'
-    let item = document.querySelectorAll(selector)
-    item.forEach(el=>el.classList.add('loading'))
-}
+
 function unloading(e){
     e.querySelectorAll('*').forEach(el=>el.classList.remove('loading'))
 }
@@ -92,7 +98,7 @@ function login(){
         <img src="img/plant.svg" width="35"  alt="">
         <h3>PEKEN</h3>
     </div>
-    <h3>Login untuk checkout pesanan anda</h3>
+    <h3>Login untuk mulai berbelanja</h3>
     <a class="google-button" href="/login">
         <img src="img/logo-google-outline.svg" height="18" alt="">
         <p>Masuk dengan akun Google</p>
@@ -100,7 +106,18 @@ function login(){
     `
     modal(isi,'login')
 }
-function modal(isi,kelas){
+function myaccount(e){
+    let name  = e.getAttribute('data-name')
+    let isi = `
+    <h2>${name}</h2>
+    <a href = "/cart" >Keranjang saya</a>
+    <a href = "/order" >Pesanan saya</a>
+    <a href = "/logout" >Log out</a>
+    `
+    modal(isi , 'profile')
+}
+
+function modal(isi,kelas,cross=true){
     let bg = document.createElement('div')
     bg.classList.add('bgmodal')
 
@@ -110,12 +127,13 @@ function modal(isi,kelas){
 
     modal.innerHTML= isi
     
-    modal.innerHTML+='<img src="img/plus.svg" class="closeModal" alt="">'
+    console.log(cross)
+    if(cross) modal.innerHTML+='<img src="img/plus.svg" class="closeModal" alt="">'
 
     document.querySelector('body').appendChild(bg)
     document.querySelector('body').appendChild(modal)
-    bg.addEventListener('click',close,{once:true})
-    modal.querySelector('.closeModal').addEventListener('click',close,{once:true})
+    if(cross) bg.addEventListener('click',close,{once:true})
+    if(cross) modal.querySelector('.closeModal').addEventListener('click',close,{once:true})
 
     document.querySelectorAll('nav,main').forEach(el=>{el.style.filter = 'blur(1px)' })   
     
@@ -140,3 +158,39 @@ function modal(isi,kelas){
 
 }
 
+function notif(message){
+    let notiflain = document.querySelectorAll('.notif')
+    if(notiflain.length) notiflain.forEach(el=>closenotif(el))
+    
+    let notif = document.createElement('div')
+    notif.classList.add('notif')
+    notif.innerHTML = message
+
+    document.querySelector('body').appendChild(notif)  
+
+    setTimeout(()=>{closenotif(notif)},3000)
+
+    function closenotif(ell){
+        ell.animate([
+            {},
+            {   
+                opacity: 0,
+                transform: 'translateY(-150%) scale(0.85)' 
+            }
+            ], {
+            easing: 'cubic-bezier(0.18, 0.89, 0.32, 1.28)',
+            duration: 300,
+            iterations: 1
+            })
+        setTimeout(()=>{ell.remove()},300)
+    }
+}
+function copy(e){
+    var r = document.createRange();
+    r.selectNode(e.parentElement.querySelector('b'));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    notif('Tersalin')
+}

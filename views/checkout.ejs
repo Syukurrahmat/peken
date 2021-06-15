@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</title>
+    <title>Checkout | Peken</title>
     <link rel="stylesheet" href="style.css">
-
+    <link rel="shortcut icon" href="img/icon.ico">
 </head>
 <body>
     
@@ -18,10 +18,11 @@
                 <p> | Checkout</p>
             </a>            
             <div class="flex-right">
-                <button class="button-soft"><%= username %></button>
+                <button class="button-soft" style="cursor:default;"><%= username %></button>
             </div>
         </div>
     </nav>
+    
 
     <div class="container">
         <main class="checkoutpage">
@@ -31,41 +32,39 @@
                         <h4>Alamat Pengiriman</h4>
                         <p class="editAlamat">Ubah</p>
                     </div>
-                    <p class="alamatdisp"><%= (address)? address : 'tidak ada alamat tersimpan' %></p>
+                    <p class="alamatdisp"><%= address %></p>
                 </div>
                 
             </div>
             <article class="checkoutlist">
                 <div class="box-product-cart ">
                     <section class="product-c flex-left">
-                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div class="loading">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </div>
                         <div>
-                            <p class="name">Lorem ipsum dolor sit. lorem</p>
-                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            <p class="name loading">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                         </div>
                     </section>
                     <section class="product-c flex-left">
-                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div class="loading">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </div>
                         <div>
-                            <p class="name">Lorem ipsum dolor sit. lorem</p>
-                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            <p class="name loading">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                         </div>
                     </section>
                     <section class="product-c flex-left">
-                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        <div class="loading">
+                            <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
+                        </div>
                         <div>
-                            <p class="name">Lorem ipsum dolor sit. lorem</p>
-                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
+                            <p class="name loading">Lorem ipsum dolor sit. lorem</p>
+                            <p class="price loading" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
                         </div>
                     </section>
-                    <section class="product-c flex-left">
-                        <img src="image-data/default-placeholder.png" height="100" class="productImage" alt="">
-                        <div>
-                            <p class="name">Lorem ipsum dolor sit. lorem</p>
-                            <p class="price" data-sum=0>3 x Rp 000.000 = Rp. 1.000.000</p>
-                        </div>
-                    </section>
-
                 </div>
 
             
@@ -76,15 +75,15 @@
                         <h4>Rincian Pembayaran</h4>
                         <div class="flex-between">
                             <p>Total Belanja</p>
-                            <b>Rp.23.000</b>
+                            <b class="loading">Rp.00.000</b>
                         </div>
                         <div class="flex-between">
                             <p>Ongkos Kirim</p>
-                            <b>Rp.23.000</b>
+                            <b class="loading"> Rp.00.000</b>
                         </div>
                         <div class="flex-between">
                             <p>Total Pembayaran</p>
-                            <b>Rp.23.000</b>
+                            <b class="loading">Rp.00.000</b>
                         </div>
                     </div>
                     <div style="margin-top: 20px;">
@@ -131,7 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" class="button" style="margin-top: 20px; width: 100%;" value='BAYAR RP.10000000'>
+                            <input type="submit" class="button total" style="margin-top: 20px; width: 100%;" value='BAYAR'>
                         </form>
 
                     </div>
@@ -143,6 +142,33 @@
     </div>
 
     <footer>
+        <div class="container flex-between">
+            <div>
+                <div>
+                    <div class="webName flex-left" href="/">
+                        <img src="img/plant white.svg" width="25"  alt="">
+                        <h3>PEKEN</h3>
+                    </div>
+                    <p>Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau</p>
+                </div>
+                <div>
+                    <h4>Ikuti kami</h4>
+                    <div class="flex-left sosmed">
+                        <a href=""><img src="img/bxl-facebook.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/instagram.svg" height="20" alt=""></a>
+                        <a href=""><img src="img/twitter-bird.svg" height="18" alt=""></a>
+                    </div>
+                </div>
+            </div>
+                <div>
+                    <h4>Kontak kami</h4>
+                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                    <a href="tel:6287882116939">+62 878 8211 6939</a>
+                    
+                </div>
+
+        </div>
     </footer>
 
 <script src="script/script.js"></script>

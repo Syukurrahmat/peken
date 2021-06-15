@@ -1,14 +1,13 @@
-const { raw } = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 
-let shema = 'peken'
-let username  = 'root'
-let password = ''
-let host = 'localhost'
-// let shema = 'heroku_475b4e555ae400e'
-// let username  = 'b01b5fa34784f1'
-// let password = '39feac2a'
-// let host = 'us-cdbr-east-03.cleardb.com'
+// let shema = 'peken'
+// let username  = 'root'
+// let password = ''
+// let host = 'localhost'
+let shema = 'freedbtech_peken'
+let username  = 'freedbtech_Syukur'
+let password = 'rVbBxcM!WjPj29@'
+let host = 'freedb.tech'
 
 const sequelize = new Sequelize(shema, username, password, {
     host: host,
@@ -38,6 +37,7 @@ const Products = sequelize.define('products', {
 const Users = sequelize.define('users', {
     id : {type: DataTypes.STRING , primaryKey:true},
     name : {type: DataTypes.STRING},
+    username : {type: DataTypes.STRING},
     email : {type: DataTypes.STRING},
     cartList : {type: DataTypes.JSON},
     purchasedList : {type: DataTypes.JSON},
@@ -50,15 +50,22 @@ const Users = sequelize.define('users', {
 const Order = sequelize.define('orders', {
     id : {type: DataTypes.STRING , primaryKey:true},
     method : {type: DataTypes.STRING},
-    total : {type: DataTypes.INTEGER},
+    bayar : {type: DataTypes.JSON},
     deadline : {type: DataTypes.INTEGER},
     payment_code : {type: DataTypes.STRING},
     user : {type: DataTypes.STRING},
-    from : {type: DataTypes.INTEGER},
+    address : {type: DataTypes.JSON},
+    list : {type: DataTypes.JSON},
+    status : {type : DataTypes.STRING},
+    accepted : {type : DataTypes.INTEGER}
     
 }, {
     freezeTableName: true
 });
+
+
+
+
 
 module.exports = {Products,sequelize,Users, Order} ;
 
