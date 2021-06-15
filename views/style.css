@@ -17,6 +17,7 @@ body{
 }
 main{
     min-height: calc(100vh - 262px);
+    height: auto;
 }
 a{
     text-decoration: none;
