@@ -89,7 +89,7 @@ module.exports = (app)=>{
         res.json({data})
     })
     app.get('/cartlist',checkreferrer,async(req,res)=>{
-        let cart = ((req.isAuthenticated())? req.user.cartList : req.cookies['cartLocal']) ||{}
+        let cart =  req.user.cartList || {}
         
         let data = await Products.findAll({
             attributes:['id','productName', 'image', 'price','stock','units'],
