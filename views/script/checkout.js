@@ -149,7 +149,8 @@ function bayar(e){
                 e.querySelector('.error').innerText=res.error
                 
             }
-            
+            document.querySelectorAll('.modal, .bgmodal').forEach(el=>el.remove())
+            document.querySelectorAll('*').forEach(el=>el.style.filter=null)
             setTimeout(()=>{
                 e.querySelector('.error').remove()
             },10000)

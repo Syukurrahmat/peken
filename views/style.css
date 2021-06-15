@@ -841,6 +841,7 @@ select, .alamat input{
 
 .bayar{
     max-width: 500px;
+    width: max-content;
     margin: 0 auto;
     border-radius: 5px;
     padding: 20px;
