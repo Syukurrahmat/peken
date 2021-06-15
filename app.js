@@ -7,10 +7,11 @@ const bodyParser    = require('body-parser')
 const passport		= require('passport');
 const flash         = require('connect-flash');
 const port          = process.env.PORT || 5000;
+const dotenv        = require('dotenv');
 
 
 
-
+dotenv.config();
 app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'ejs')
@@ -37,6 +38,7 @@ require('./routes/login')(app)
 require('./routes/page')(app)
 require('./routes/getdata')(app)
 require('./routes/handler')(app)
+
 
 app.listen(port, () => {
     console.log(`App berjalan pada port ${port}`)

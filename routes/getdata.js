@@ -92,7 +92,7 @@ module.exports = (app)=>{
                     { [Op.not]: [{ id: id }]}
                 ],
             },
-            order:sequelize.random(),
+            order:sequelize.literal('stock > 0 DESC ,rand(159)'),
             limit: 5,
         }); 
         data = setOnCart(req,data)

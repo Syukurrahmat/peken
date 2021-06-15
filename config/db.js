@@ -1,20 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
-// let shema = 'peken'
-// let username  = 'root'
-// let password = ''
-// let host = 'localhost'
-let shema = 'freedbtech_peken'
-let username  = 'freedbtech_Syukur'
-let password = 'rVbBxcM!WjPj29@'
-let host = 'freedb.tech'
+let schema = process.env.SCHEMA
+let username  = process.env.USERNAME
+let password = process.env.PASSWORD
+let host = process.env.HOST
 
-const sequelize = new Sequelize(shema, username, password, {
+const sequelize = new Sequelize(schema, username, password, {
     host: host,
     dialect:'mysql',
     logging: false,
-    // query:raw,
-    
 });
 
 const Products = sequelize.define('products', {
