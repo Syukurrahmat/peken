@@ -91,11 +91,6 @@ module.exports = (app)=>{
     app.get('/cartlist',checkreferrer,async(req,res)=>{
         let cart = ((req.isAuthenticated())? req.user.cartList : req.cookies['cartLocal']) ||{}
         
-        let whereQuery = []
-        for (let key of Object.keys(cart)){
-            whereQuery.push({id:key})
-        }
-    
         let data = await Products.findAll({
             attributes:['id','productName', 'image', 'price','stock','units'],
             where: {id :{[Op.or] : Object.keys(cart)}},
