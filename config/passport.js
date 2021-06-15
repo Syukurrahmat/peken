@@ -6,7 +6,7 @@ const { Users, sequelize} = require('../config/db')
 passport.use(new GoogleStrategy({
     clientID: '500883531451-vosfjs87c326ta0qtue8i7apacshu3uo.apps.googleusercontent.com',
     clientSecret: 'pdGqWJE6AcD76fILLqnnzIND',
-    callbackURL: "http://localhost:5000/auth/google/callback/"
+    callbackURL: "/auth/google/callback/"
   },
   async function(accessToken, refreshToken, profile, done) {
     Users.findOrCreate({

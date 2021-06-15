@@ -164,7 +164,7 @@ function bayar(e){
 getProduct()
 async function getProduct(){
  
-    let dataft = await fetch(`http://localhost:5000/cartlist`).then(res=>res.json())
+    let dataft = await fetch(`/cartlist`).then(res=>res.json())
     let data = dataft.data
     let sum = dataft.totHarga.totHarga
 

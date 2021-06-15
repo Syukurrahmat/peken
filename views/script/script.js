@@ -60,7 +60,7 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
             document.querySelector('.cobx .button').classList.add('cursornone')
         }
 
-        let ft = await fetch('http://localhost:5000/cart',{
+        let ft = await fetch('/cart',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

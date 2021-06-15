@@ -1,6 +1,6 @@
 initTopProduct()
 async function initTopProduct(){
-    let data = await fetch('http://localhost:5000/topProduct').then(res=>res.json()).then(res=>res.data)
+    let data = await fetch('/topProduct').then(res=>res.json()).then(res=>res.data)
     console.log(data)
     let sectionBox = document.querySelectorAll('.box-product section')
     sectionBox.forEach((e,i) => {

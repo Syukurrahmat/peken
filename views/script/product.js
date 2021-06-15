@@ -13,7 +13,7 @@ async function getProduct(offset,many,begin=false){
         window.document.title = `Hasil pencarian ${key} | Peken`
     }
 
-    let data = await fetch(`http://localhost:5000/getProduct?c=${category}&offset=${offset}&many=${many}&sortby=${sort}&key=${key}`).then(res=>res.json()).then(res=>res.data)
+    let data = await fetch(`/getProduct?c=${category}&offset=${offset}&many=${many}&sortby=${sort}&key=${key}`).then(res=>res.json()).then(res=>res.data)
     
     if(data.length==0 && begin==true){
         document.querySelector('article').innerHTML=`

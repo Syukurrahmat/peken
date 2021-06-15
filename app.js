@@ -39,5 +39,5 @@ require('./routes/getdata')(app)
 require('./routes/handler')(app)
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+    console.log(`App berjalan pada port ${port}`)
+})

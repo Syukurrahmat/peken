@@ -3,7 +3,7 @@ let id = arr[arr.indexOf('product')+1]
 getRelated()
 getdetail()
 async function getdetail(){
-    let data = await fetch(`http://localhost:5000/detail?id=${id}`).then(res=>res.json())
+    let data = await fetch(`/detail?id=${id}`).then(res=>res.json())
     console.log(data)
 
     let wr = document.querySelector('.display-product')
@@ -31,7 +31,7 @@ async function getdetail(){
 }
 
 async function getRelated(){
-    let data = await fetch(`http://localhost:5000/relateProduct?id=${id}`).then(res=>res.json()).then(res=>res.data)
+    let data = await fetch(`/relateProduct?id=${id}`).then(res=>res.json()).then(res=>res.data)
     if(data.length==0){
         document.querySelector('.relateProduct').innerHTML = `
         <h4>Produk terkait</h4>
