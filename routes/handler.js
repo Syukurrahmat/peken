@@ -4,16 +4,12 @@ const axios = require('axios');
 const { Op, or, where } = require("sequelize");
 const randomstring = require("randomstring");
 
-
 module.exports = (app)=>{
-
     app.post('/cart',checkreferrer,async (req,res)=>{
-        
         let stock = await Products.findOne({where:{id:req.body.id},attributes:['stock']})
         if(stock.stock == 0) return
         
         let cart;
-
         if(!req.isAuthenticated()){
             cart = req.cookies['cartLocal'] || {}
             cart[req.body.id] = req.body.total
@@ -21,13 +17,10 @@ module.exports = (app)=>{
             for (let key of Object.keys(cart)) if(cart[key]=='0') delete cart[key]
             res.cookie('cartLocal', cart ,{ maxAge: 30*24*60*60*1000 ,httpOnly:true })
         }else{
-            
             let data =  await Users.findOne({ attributes:['id','cartList'], where: { id : req.user.id }})
             
             if(!data.cartList) data.cartList = {}
-
             data.cartList = {...data.cartList , [req.body.id]:req.body.total}
-
             for (let key of Object.keys(data.cartList)) if(data.cartList[key]=='0') delete data.cartList[key]
             
             await data.save()
@@ -35,11 +28,8 @@ module.exports = (app)=>{
         }
     
         let sc = await sumcart(req , res,cart)
-        
         res.json({totHarga:sc.totHarga , count:sc.count})
     })
-    
-    
     
     app.post('/setaddress',checkreferrer, async (req,res)=>{
         let {name,hp,provinsi,kabupaten,kecamatan,kelurahan,jalan,postal_code} = req.body
@@ -98,15 +88,10 @@ module.exports = (app)=>{
         })
 
         await Order.create({id, method, bayar , deadline , payment_code ,user , address , list ,status : 'yet'})
-
         let userData =  await Users.findOne({attributes:['id', 'cartList' , 'purchasedList'] ,where: { id : req.user.id }});
-        
         userData.cartList = null
-        
         if(!userData.purchasedList) userData.purchasedList = []
-        
         userData.purchasedList = [...userData.purchasedList, id]
-        
         await userData.save()
 
         res.cookie('bayar',id,{maxAge:300000})
@@ -116,6 +101,4 @@ module.exports = (app)=>{
         res.header('Content-Length', data.length);
         res.end(data);
     })
-
-
 }

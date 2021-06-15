@@ -1,4 +1,4 @@
-document.querySelector('.editAlamat').addEventListener('click',(e)=>{
+function editalamat(){
     let isi =`
         <div>
             <div class="flex-between">
@@ -31,18 +31,11 @@ document.querySelector('.editAlamat').addEventListener('click',(e)=>{
                     <input type="submit" class="button" value="simpan">
                 </div>
             </form>
-            
         </div>
-        
     `
-
     modal(isi,'alamat')
-
     alamat()
-})
-
-
-
+}
 
 async function alamat(){
     let url = {
@@ -51,7 +44,6 @@ async function alamat(){
         kecamatan : 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=',
         kelurahan : 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=',
     }
-
     if(document.querySelector('#provinsi').value == "") set('provinsi')
 
     async function set(apa,id=''){
@@ -92,7 +84,6 @@ async function savealamat(e){
         },
         body : JSON.stringify(data)
     }).then(res=>res.json()).then(res=>{
-        console.log(res)
         if(res.status==='success'){
             e.closest('.modal').querySelector('.closeModal').click()
             e.querySelector('.button').value='Simpan'
@@ -168,7 +159,6 @@ async function getProduct(){
     let data = dataft.data
     let sum = dataft.totHarga.totHarga
 
-    console.log(sum)
     if(data.length>3){
         for(let i = 0 ; i<data.length-3 ; i++){
             let box = document.querySelector('.box-product-cart')
@@ -185,7 +175,6 @@ async function getProduct(){
         }
 
         let element = e.querySelectorAll(".productImage,p,.button")
-        console.log(element)
         element[0].setAttribute('src' , `image-data/${data[i].image.file}`)
         element[0].setAttribute('alt' , data[i].image.alt)
         element[1].innerHTML = data[i].productName

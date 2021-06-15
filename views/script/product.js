@@ -128,7 +128,6 @@ function plusQuery(prop,val) {
     }
 
     let newUrl = path + param
-
     var obj = { Title: 'Peken - Belanja buah dan sayur pilihan dengan kualitas segar dan harga terjangkau', path : newUrl  };
     window.history.pushState({}, obj.Title, obj.path);
 }

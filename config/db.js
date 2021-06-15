@@ -23,7 +23,6 @@ const Products = sequelize.define('products', {
    sold : {type: DataTypes.INTEGER},
    image : {type: DataTypes.JSON},
    units : {type: DataTypes.STRING},
-   
 }, {
     freezeTableName: true
 });
@@ -36,7 +35,6 @@ const Users = sequelize.define('users', {
     cartList : {type: DataTypes.JSON},
     purchasedList : {type: DataTypes.JSON},
     address : {type:DataTypes.JSON}
-    
 }, {
     freezeTableName: true
 });
@@ -52,15 +50,8 @@ const Order = sequelize.define('orders', {
     list : {type: DataTypes.JSON},
     status : {type : DataTypes.STRING},
     accepted : {type : DataTypes.INTEGER}
-    
 }, {
     freezeTableName: true
 });
 
-
-
-
-
 module.exports = {Products,sequelize,Users, Order} ;
-
-

@@ -1,10 +1,9 @@
 let arr = window.location.href.replaceAll('/','-').replaceAll('?','-').split('-')
 let id = arr[arr.indexOf('product')+1]
-getRelated()
 getdetail()
+getRelated()
 async function getdetail(){
     let data = await fetch(`/detail?id=${id}`).then(res=>res.json())
-    console.log(data)
 
     let wr = document.querySelector('.display-product')
     wr.querySelector('section').setAttribute("data-id",data.id)

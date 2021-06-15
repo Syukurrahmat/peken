@@ -4,14 +4,11 @@ const axios = require('axios');
 const stringSimilarity = require("string-similarity");
 const qs = require("querystring");
 
-
-
 async function begin(req,res){
     let username = (req.isAuthenticated())? req.user.username : 'Login'
     let name = (req.isAuthenticated())? req.user.name : ''
 
     let sc = await sumcart(req,res)
-
 
     let totHarga = (sc.totHarga==0)? '' : new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"})
          .format(sc.totHarga)
@@ -20,31 +17,21 @@ async function begin(req,res){
 
     let count = (sc.count==0)? '' : sc.count
 
-
     let sortInputList = {'price-asc':'Harga Terendah','price-desc':'Harga Tertinggi','abjad-asc':'A - Z','abjad-desc':'Z - A'}
-
     let sortInput = (req.query.sortby)? sortInputList[req.query.sortby] : 'Paling sesuai'
-
 
     return{ username ,name, totHarga , count, sortInput}
 }
 
 async function sumcart(req ,res=null, data=null){
-
     let cart = ((req.isAuthenticated())? req.user.cartList : req.cookies['cartLocal']) || {}
     if(req.isAuthenticated() &&  req.cookies['cartLocal']!==undefined){
-
         let data =  await Users.findOne({ attributes:['id','cartList'], where: { id : req.user.id }})
-            
         if(!data.cartList) data.cartList = {}
-
         data.cartList = {...data.cartList , ...req.cookies['cartLocal']}
-
         for (let key of Object.keys(data.cartList)) if(data.cartList[key]=='0') delete data.cartList[key]
-        
         await data.save()
         cart = data.cartList
-
         res.clearCookie("cartLocal");
     }
     if(data) cart = data
@@ -64,7 +51,6 @@ async function sumcart(req ,res=null, data=null){
 
 function setOnCart(req,data){
     let iddata = data.map(e=>e.id)
-
     let oncart = ((req.isAuthenticated())? req.user.cartList : req.cookies['cartLocal']) ||{}
 
     for (let key of Object.keys(oncart)){
@@ -77,7 +63,6 @@ function setOnCart(req,data){
 }
 
 async function getongkir(req){
-    
     let totHarga = (await sumcart(req)).totHarga
     if(req.user.address==null) return res.json({error:'Alamat belum ditetapkan' , totHarga})
     
@@ -94,7 +79,6 @@ async function getongkir(req){
     let weight = 0 
     
     units.forEach(e=> weight += cart[e.id] * estimatedWeight[e.units])
-    
     weight = (weight>30000)? 3000 : weight 
     
     let ongkir_res
@@ -122,9 +106,7 @@ async function getongkir(req){
     return {ongkir , totHarga ,  totBayar}
 }
 
-
 async function getCityID_RO(id){
-
     let data = await axios.all([
         axios(`https://dev.farizdotid.com/api/daerahindonesia/kota/${id}`),
         axios({
@@ -136,8 +118,8 @@ async function getCityID_RO(id){
     let namaKab = data[0].data.nama
     
     let allKab = data[1].data.rajaongkir.results.map(e=>{
-            return {id : e.city_id, name : e.type+' '+e.city_name}
-        })
+        return {id : e.city_id, name : e.type+' '+e.city_name}
+    })
   
     let objKab_id = {}
     
@@ -147,9 +129,7 @@ async function getCityID_RO(id){
     })
 
     let sim = stringSimilarity.findBestMatch(namaKab, allKab.map(e=>e.name)).bestMatch.target
-
     let kab_id  = objKab_id[sim]
-
     return kab_id
 }
 
@@ -172,12 +152,11 @@ function num2rupiah(number){
      .format(number)
      .replace('IRD','Rp.')
      .replace(',00','') || number
- }
+}
 
 function checkreferrer(req,res,next){
     if( !req.headers.referer || new URL(req.headers.referer).hostname != req.hostname ) return res.redirect('/')
     return next()
 }
-
 
 module.exports = {begin , sumcart, getCityID_RO, setOnCart , toFullTanggal , getongkir,num2rupiah , checkreferrer }

@@ -3,7 +3,6 @@ const {Products,sequelize, Users ,Order} = require('../config/db')
 const {isLoggedIn, isLoggedOut} = require('../config/passport');
 
 module.exports = (app)=>{
-
     app.get('/', async(req,res)=>{
         res.render('home', await begin(req,res) )
     })
@@ -22,12 +21,10 @@ module.exports = (app)=>{
         res.render('detail',await begin(req,res))
     })
 
-
     app.get('/g/:any', async(req,res)=>{
         let validation = {'buah':'Buah' ,'sayur':'Sayur', 'all':'Semua' }
         let key = validation[req.params.any]
         if(key===undefined) return res.status(404).send('Not found');
-
 
         res.render('product',{...await begin(req,res), ...{key}})
     })
@@ -35,8 +32,8 @@ module.exports = (app)=>{
     app.get('/cart',isLoggedIn,(req,res)=>{
         res.render('cart',{username:(req.isAuthenticated())? req.user.username : 'Login'})
     })
+
     app.get('/checkout',isLoggedIn, async (req,res)=>{
-        
         if( !req.headers.referer || new URL(req.headers.referer).pathname != '/cart' ) return res.redirect('/cart')
 
         res.render('checkout',{
@@ -47,12 +44,8 @@ module.exports = (app)=>{
     app.get('/order',isLoggedIn,async(req,res)=>{
         res.render('order',{...await begin(req,res)})
     })
-
-    
-
   
     app.get('/order/succes/:id',async(req,res)=>{
-        console.log(req.user.purchasedList)
         let id = req.params.id
         if(!req.user.purchasedList.includes(id) || !req.cookies['bayar']) return res.status(404).send('Not found');
         
@@ -60,14 +53,8 @@ module.exports = (app)=>{
 
         let data = await Order.findOne({where:{id:req.params.id}})
         let deadline = toFullTanggal(data.deadline)
-
         let bayar  = num2rupiah(data.bayar.totBayar)
-
 
         res.render('bayar' , {data , deadline , bayar})
     })
-
-
-
-
 }

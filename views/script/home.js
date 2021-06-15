@@ -1,7 +1,6 @@
-initTopProduct()
-async function initTopProduct(){
+getTopProduct()
+async function getTopProduct(){
     let data = await fetch('/topProduct').then(res=>res.json()).then(res=>res.data)
-    console.log(data)
     let sectionBox = document.querySelectorAll('.box-product section')
     sectionBox.forEach((e,i) => {
         e.setAttribute('data-id',data[i].id)
@@ -26,7 +25,4 @@ async function initTopProduct(){
             unloading(e)
         },i*100+200)
     });
-
-    
-    
 }

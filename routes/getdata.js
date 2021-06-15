@@ -5,7 +5,6 @@ const axios = require('axios');
 
 
 module.exports = (app)=>{
-
     app.get('/detail', checkreferrer, async(req,res)=>{
         let data =  await Products.findAll({ where: { id : req.query.id }})
         data = setOnCart(req,data)
@@ -26,13 +25,10 @@ module.exports = (app)=>{
         }); 
         
         data = setOnCart(req,data)
-    
         res.json({data})
     })
     
-    
     app.get('/getProduct',checkreferrer, async (req,res)=>{
-    
         let sortValidation = {'none':'none', 'price':'price','abjad':'productName'}
         let orderValidation = ['NONE','DESC','ASC']
     
@@ -53,7 +49,6 @@ module.exports = (app)=>{
         let whereQuery = null
         if(category !=='all') whereQuery = {category:category}
         if(key !== undefined && category == 'search')  whereQuery = {productName : { [Op.substring] : key }} 
-        
     
         let orderQuery = (orderConcat == 'none NONE')? sequelize.literal('stock > 0 DESC ,rand(159)') : sequelize.literal(orderConcat)
     
@@ -65,18 +60,13 @@ module.exports = (app)=>{
             offset: Number(req.query.offset),
     
          }); 
-         data.forEach(e=>console.log(e.stock))
-    
          data = setOnCart(req,data)
-    
          res.json({data})
     })
     
     app.get('/relateProduct',checkreferrer, async(req,res)=>{
         let id = req.query.id
-    
         let name =  await Products.findOne({attributes:['productName'], where: {id}})
-        
         let similar = name.productName.split(' ')
     
         let whereQuery= []
@@ -108,9 +98,7 @@ module.exports = (app)=>{
     
         let data = await Products.findAll({
             attributes:['id','productName', 'image', 'price','stock','units'],
-            where: {
-                [Op.or]: whereQuery
-          }
+            where: {id :{[Op.or] : Object.keys(cart)}},
         })
         data = setOnCart(req,data)
     
@@ -136,11 +124,9 @@ module.exports = (app)=>{
     })
 
     app.get('/getdetailorder:id',checkreferrer,async(req,res)=>{
-        
         let data = await Order.findOne({
             where: {id : req.params.id },
             raw : true
-        
         })
 
         let listBarang =  await Products.findAll({
@@ -148,9 +134,6 @@ module.exports = (app)=>{
             where: {id :{[Op.or] : Object.keys(data.list)}},
             raw : true
          }); 
-
         res.json({...data , listBarang})
-
     })
-
 }

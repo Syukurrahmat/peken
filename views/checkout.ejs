@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="img/icon.ico">
 </head>
 <body>
-    
     <nav>
         <div class="container flex-between">
             <a class="webName flex-left" href="/">
@@ -22,19 +21,16 @@
             </div>
         </div>
     </nav>
-    
-
     <div class="container">
         <main class="checkoutpage">
             <div class="alamatsection">
                 <div>
                     <div class="flex-between">
                         <h4>Alamat Pengiriman</h4>
-                        <p class="editAlamat">Ubah</p>
+                        <p class="editAlamat" onclick="editalamat()">Ubah</p>
                     </div>
                     <p class="alamatdisp"><%= address %></p>
                 </div>
-                
             </div>
             <article class="checkoutlist">
                 <div class="box-product-cart ">
@@ -66,81 +62,74 @@
                         </div>
                     </section>
                 </div>
-
-            
             </article>
-                <div class="checkout">
-                    <div class=rincianBay>
+            <div class="checkout">
+                <div class=rincianBay>
 
-                        <h4>Rincian Pembayaran</h4>
-                        <div class="flex-between">
-                            <p>Total Belanja</p>
-                            <b class="loading">Rp.00.000</b>
-                        </div>
-                        <div class="flex-between">
-                            <p>Ongkos Kirim</p>
-                            <b class="loading"> Rp.00.000</b>
-                        </div>
-                        <div class="flex-between">
-                            <p>Total Pembayaran</p>
-                            <b class="loading">Rp.00.000</b>
-                        </div>
+                    <h4>Rincian Pembayaran</h4>
+                    <div class="flex-between">
+                        <p>Total Belanja</p>
+                        <b class="loading">Rp.00.000</b>
                     </div>
-                    <div style="margin-top: 20px;">
-                        <h4>Metode pembayaran</h4>
-                        <form action="" onsubmit="bayar(this);return false" class="medBayar">
-                            <div>
-                                <div class=" flex-between">
-                                    <label for="store">
-                                        <b>Convenience Store</b>
-                                        <p>Alfamart, Indomaret</p>
-                                    </label>
-                                    <input type="radio" name="medBayar" id="store" value="store" required>
-                                    
-                                </div>
-                                <div class="pilih">
-                                    <select name="store">
-                                        <option value="" disabled selected hidden>Silakan Pilih</option>
-                                        <option value="Alfamart">Alfamart</option>
-                                        <option value="Indomaret">Indomaret</option>
-                                    </select>
-                                    <div class="ket">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo reiciendis mollitia enim facilis, odit veniam consequatur aspernatur reprehenderit non facere! Atque dignissimos non minus exercitationem dicta nulla eius consectetur accusantium.
-                                    </div>
+                    <div class="flex-between">
+                        <p>Ongkos Kirim</p>
+                        <b class="loading"> Rp.00.000</b>
+                    </div>
+                    <div class="flex-between">
+                        <p>Total Pembayaran</p>
+                        <b class="loading">Rp.00.000</b>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h4>Metode pembayaran</h4>
+                    <form action="" onsubmit="bayar(this);return false" class="medBayar">
+                        <div>
+                            <div class=" flex-between">
+                                <label for="store">
+                                    <b>Convenience Store</b>
+                                    <p>Alfamart, Indomaret</p>
+                                </label>
+                                <input type="radio" name="medBayar" id="store" value="store" required>
+                                
+                            </div>
+                            <div class="pilih">
+                                <select name="store">
+                                    <option value="" disabled selected hidden>Silakan Pilih</option>
+                                    <option value="Alfamart">Alfamart</option>
+                                    <option value="Indomaret">Indomaret</option>
+                                </select>
+                                <div class="ket">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo reiciendis mollitia enim facilis, odit veniam consequatur aspernatur reprehenderit non facere! Atque dignissimos non minus exercitationem dicta nulla eius consectetur accusantium.
                                 </div>
                             </div>
-                            <div>
-                                <div class=" flex-between">
-                                    <label for="virtual-acc">
-                                        <b>Virtual Account</b>
-                                        <p>BRI, BCA, MANDIRI, BNI </p>
-                                    </label>
-                                    <input type="radio" name="medBayar" id="virtual-acc" value="virtual-acc">
-                                </div>
-                                <div class="pilih">
-                                    <select name="virtual-acc">
-                                        <option value="" disabled selected hidden>Silakan Pilih</option>
-                                        <option value="BNI">BNI</option>
-                                        <option value="BRI">BRI</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="Mandiri">Mandiri</option>
-                                    </select>
-                                    <div class="ket">
-                                  
-                                    </div>
+                        </div>
+                        <div>
+                            <div class=" flex-between">
+                                <label for="virtual-acc">
+                                    <b>Virtual Account</b>
+                                    <p>BRI, BCA, MANDIRI, BNI </p>
+                                </label>
+                                <input type="radio" name="medBayar" id="virtual-acc" value="virtual-acc">
+                            </div>
+                            <div class="pilih">
+                                <select name="virtual-acc">
+                                    <option value="" disabled selected hidden>Silakan Pilih</option>
+                                    <option value="BNI">BNI</option>
+                                    <option value="BRI">BRI</option>
+                                    <option value="BCA">BCA</option>
+                                    <option value="Mandiri">Mandiri</option>
+                                </select>
+                                <div class="ket">
+                                
                                 </div>
                             </div>
-                            <input type="submit" class="button total" style="margin-top: 20px; width: 100%;" value='BAYAR'>
-                        </form>
-
-                    </div>
+                        </div>
+                        <input type="submit" class="button total" style="margin-top: 20px; width: 100%;" value='BAYAR'>
+                    </form>
+                </div>
             </div>
-    
-            
-            
         </main>
     </div>
-
     <footer>
         <div class="container flex-between">
             <div>
@@ -160,17 +149,14 @@
                     </div>
                 </div>
             </div>
-                <div>
-                    <h4>Kontak kami</h4>
-                    <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
-                    <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
-                    <a href="tel:6287882116939">+62 878 8211 6939</a>
-                    
-                </div>
-
+            <div>
+                <h4>Kontak kami</h4>
+                <p>Jl. maju mundur, Karangtalun, Tanon, Sragen, Jawa tengah, Indonesia , 12345</p>
+                <a href="mailto:syukurtullah@gmail.com">Info@peken.com</a>
+                <a href="tel:6287882116939">+62 878 8211 6939</a>
+            </div>
         </div>
     </footer>
-
 <script src="script/script.js"></script>
 <script src="script/checkout.js"></script>
 </body>

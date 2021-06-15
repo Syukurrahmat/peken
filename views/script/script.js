@@ -9,8 +9,6 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
     cart_p.children[0].style.display = 'none'
     cart_p.children[1].style.display = 'flex'
 
-
-
     let min = cart_p.querySelector('.cart-n div:first-child')
     let number = cart_p.querySelector('.cart-n input')
     let plus = cart_p.querySelector('.cart-n div:last-child')
@@ -82,19 +80,21 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
     }
 }
 
-
 function unloading(e){
     e.querySelectorAll('*').forEach(el=>el.classList.remove('loading'))
 }
+
 function num2rupiah(number){
     return (!Number.isInteger(number))? number :  new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR"})
      .format(number)
      .replace('IRD','Rp.')
      .replace(',00','') || number
- }
+}
+
 function rupah2num(number){
     return Number(number.replace('Rp&nbsp;','').replace('.',''))
 }
+
 function login(){
     let isi = `
     <div class="webName flex-left" href="/">
@@ -109,6 +109,7 @@ function login(){
     `
     modal(isi,'login')
 }
+
 function myaccount(e){
     let name  = e.getAttribute('data-name')
     let isi = `
@@ -130,7 +131,6 @@ function modal(isi,kelas,cross=true){
 
     modal.innerHTML= isi
     
-    console.log(cross)
     if(cross) modal.innerHTML+='<img src="img/plus.svg" class="closeModal" alt="">'
 
     document.querySelector('body').appendChild(bg)
@@ -158,7 +158,6 @@ function modal(isi,kelas,cross=true){
             modal.remove()
         },300)
     }
-
 }
 
 function notif(message){

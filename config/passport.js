@@ -2,7 +2,6 @@ const passport			= require('passport');
 const GoogleStrategy    = require('passport-google-oauth20').Strategy;
 const { Users, sequelize} = require('../config/db')
 
-
 passport.use(new GoogleStrategy({
     clientID: '500883531451-vosfjs87c326ta0qtue8i7apacshu3uo.apps.googleusercontent.com',
     clientSecret: 'pdGqWJE6AcD76fILLqnnzIND',
@@ -25,7 +24,6 @@ passport.use(new GoogleStrategy({
         
 }))
 
-
 passport.serializeUser(function(user, done) {
 
     done(null, user); 
@@ -36,7 +34,6 @@ passport.deserializeUser(function(user, done) {
         done(null,user);
     });
 })
-
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) return next();

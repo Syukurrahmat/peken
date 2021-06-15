@@ -8,9 +8,7 @@ async function getdata(){
         <h3>Anda belum memiliki pesanan</h3>
         </div>
     `
-
     let data = []
-
 
     data[0] = dt.filter(e=>e.status == 'yet')
     data[1] = dt.filter(e=>e.status == 'paid')
@@ -63,14 +61,12 @@ function toFullTanggal(dt){
     let tahun = new Date(dt).getFullYear();
 
     return (`${jam}:${menit} , ${tanggal} ${bulan} ${tahun}`);
-
 }
 
 function isoToDate(iso){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
     let date = iso.split('T')[0].split('-')
     let time = iso.split('T')[1].split(':').slice(0,2).join(':')
-   
         
     return (`${time} , ${date[2]} ${bulanArr[Number(date[1])]} ${date[0]}`);
 }
@@ -157,7 +153,6 @@ async function detail(e){
         elm[0].setAttribute('alt',e.image.alt)
         elm[1].innerHTML = e.productName
         elm[2].innerHTML = `${(listjumlah[e.id])} x ${num2rupiah(e.price)} = ${num2rupiah(listjumlah[e.id]*e.price)}`
-       
     })
     unloading(document.querySelector('.detailpesanan'))
 }

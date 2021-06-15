@@ -1,5 +1,4 @@
 getProduct()
-
 async function getProduct(){
     let dataft = await fetch(`/cartlist`).then(res=>res.json())
     let data = dataft.data

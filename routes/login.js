@@ -1,11 +1,11 @@
 const passport		= require('passport');
 
 module.exports = (app)=>{
-
     app.get('/login',(req,res)=>{
         req.flash('currentUrl',req.headers.referer)
         res.redirect('/auth/google')    
     })
+
     app.get('/logout', function(req, res){
         req.logout();
         res.redirect('/');
