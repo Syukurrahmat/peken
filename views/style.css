@@ -375,6 +375,7 @@ footer .sosmed img{
     padding: 2px 10px 2px 0;
     border-radius: 5px;
     width: auto;
+    cursor: pointer;
 }
 .cartbox:hover{
     background-color:#f5f4f4;
