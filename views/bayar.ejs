@@ -19,45 +19,48 @@
         </div>
     </nav>
     <div class="container">
-        <main class="bayar">
-            <div class="warning">
-                Jangan pernah melakukan pembayaran apa pun ke manapun terkait pemesanan ini. Sebab situs web bukan situs toko online sebenarnya
-            </div>
-            <div>
-                <p>Batas pembayaran</p>
-                <b><%= deadline %></b>
-            </div>
-            
-            <div>
-                <p>Total tagihan</p>
-                <b><%= bayar %></b>
-            </div>
-            <div>
-                <p>Nomor Pesanan</p>
-                <div class="flex-between">
-                    <b class="code"><%= data.id %></b>
-                    <b class="salin" onclick="copy(this)">Salin</b>
-                </div>
-            </div>
-            <div>
-                <p>Metode Pembayaran</p>
+        <main>
+            <div class="bayar">
 
-                <div class="flex-between">
-                    <div class="flex-left">
-                        <img src="img/<%= data.method %>.jpg" alt="" height="35">
-                        <div>
-                            <b><%= data.method %></b>
-                            <br>
-                            <b style="color: var(--hijau)" class="code"> <%= data.payment_code %></b>
-                        </div>
-                    </div>
-                    <b class="salin" onclick="copy(this)">Salin</b>
+                <div class="warning">
+                    Jangan pernah melakukan pembayaran apa pun ke manapun terkait pemesanan ini. Sebab situs web bukan situs toko online sebenarnya
                 </div>
-            </div>
-            <div class="flex-right">
-                <a href="/">
-                    <div class="button-soft">kembali ke beranda</div>
-                </a>
+                <div>
+                    <p>Batas pembayaran</p>
+                    <b><%= deadline %></b>
+                </div>
+                
+                <div>
+                    <p>Total tagihan</p>
+                    <b><%= bayar %></b>
+                </div>
+                <div>
+                    <p>Nomor Pesanan</p>
+                    <div class="flex-between">
+                        <b class="code"><%= data.id %></b>
+                        <b class="salin" onclick="copy(this)">Salin</b>
+                    </div>
+                </div>
+                <div>
+                    <p>Metode Pembayaran</p>
+    
+                    <div class="flex-between">
+                        <div class="flex-left">
+                            <img src="img/<%= data.method %>.jpg" alt="" height="35">
+                            <div>
+                                <b><%= data.method %></b>
+                                <br>
+                                <b style="color: var(--hijau)" class="code"> <%= data.payment_code %></b>
+                            </div>
+                        </div>
+                        <b class="salin" onclick="copy(this)">Salin</b>
+                    </div>
+                </div>
+                <div class="flex-right">
+                    <a href="/">
+                        <div class="button-soft">kembali ke beranda</div>
+                    </a>
+                </div>
             </div>
         </main>
     </div>

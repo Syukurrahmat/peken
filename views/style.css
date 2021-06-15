@@ -829,6 +829,7 @@ select, .alamat input{
     display: none;
 }
 .medBayar .error{
+    margin-top: 20px;
     border: 1px solid red !important;
     height: 30px;
     text-align: center;

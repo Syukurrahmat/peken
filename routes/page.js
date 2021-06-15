@@ -45,7 +45,7 @@ module.exports = (app)=>{
         res.render('order',{...await begin(req,res)})
     })
   
-    app.get('/order/succes/:id',async(req,res)=>{
+    app.get('/order/succes/:id',isLoggedIn,async(req,res)=>{
         let id = req.params.id
         if(!req.user.purchasedList.includes(id) || !req.cookies['bayar']) return res.status(404).send('Not found');
         
