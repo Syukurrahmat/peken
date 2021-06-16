@@ -74,7 +74,7 @@ async function alamat(){
 
 async function savealamat(e){
     let buttonAlamat = document.querySelector('.editAlamat')
-    let alamatdisp = document.querySelector('.alamatdisp')
+    let alamatdisp = document.querySelectorAll('.alamatdisp p')
     let submitbutton = document.querySelector('.total')
 
     e.closest('.modal').querySelector('.closeModal').click()
@@ -82,7 +82,7 @@ async function savealamat(e){
     submitbutton.value = 'Menyimpan Alamat'
     buttonAlamat.classList.add('pointereventnone')
     submitbutton.classList.add('pointereventnone')
-    alamatdisp.classList.add('loading')    
+    alamatdisp.forEach(el=>el.classList.add('loading'))    
     document.querySelectorAll('.rincianBay b').forEach(e=>e.classList.add('loading'))
 
     let data =  Object.fromEntries(new FormData(e).entries())
@@ -97,8 +97,9 @@ async function savealamat(e){
         if(res.status==='success'){
             buttonAlamat.classList.remove('pointereventnone')
             buttonAlamat.innerHTML = 'Ubah Alamat'
-            alamatdisp.innerHTML = res.strAddress
-            alamatdisp.classList.remove('loading')
+            alamatdisp[0] = res.strAddress.split(' | ')[0]
+            alamatdisp[1] = res.strAddress.split(' | ')[1]
+            alamatdisp.forEach(el=>el.classList.add('loading'))    
             notif('Alamat baru berhasil disimpan')
             getOngkir()
         }
