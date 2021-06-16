@@ -10,4 +10,4 @@ function toFullTanggal(dt){
 }
 
 let deadline = document.querySelector('.deadline')
-deadline.innerHTML = toFullTanggal(deadline.getAttribute('data-dt'))
+deadline.innerHTML = toFullTanggal(Number(deadline.getAttribute('data-dt')))
