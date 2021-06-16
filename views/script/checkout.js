@@ -79,8 +79,7 @@ async function savealamat(e){
     e.closest('.modal').querySelector('.closeModal').click()
     buttonAlamat.innerHTML = 'Menyimpan ...'
     buttonAlamat.classList.add('pointereventnone')
-    alamatdisp.classList.add('loading')
-    
+    alamatdisp.classList.add('loading')    
     document.querySelectorAll('.rincianBay b').forEach(e=>e.classList.add('loading'))
 
     let data =  Object.fromEntries(new FormData(e).entries())
