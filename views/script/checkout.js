@@ -75,10 +75,13 @@ async function alamat(){
 async function savealamat(e){
     let buttonAlamat = document.querySelector('.editAlamat')
     let alamatdisp = document.querySelector('.alamatdisp')
+    let submitbutton = document.querySelector('.total')
 
     e.closest('.modal').querySelector('.closeModal').click()
     buttonAlamat.innerHTML = 'Menyimpan ...'
+    submitbutton.innerHTML = 'Menyimpan Alamat'
     buttonAlamat.classList.add('pointereventnone')
+    submitbutton.classList.add('pointereventnone')
     alamatdisp.classList.add('loading')    
     document.querySelectorAll('.rincianBay b').forEach(e=>e.classList.add('loading'))
 
