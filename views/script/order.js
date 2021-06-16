@@ -52,6 +52,7 @@ async function getdata(){
 function toFullTanggal(dt){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
     let date = new Date(dt).toLocaleString()
+    console.log(date)
 
     let tanggal = date.split(' ')[0].split('/')
     tanggal[1] = bulanArr[tanggal[1]-1]
@@ -64,7 +65,7 @@ function toFullTanggal(dt){
 function isoToDate(iso){
     iso = iso.replace(' ','T')
     iso += '.000Z'
-
+console.log(iso)
     return toFullTanggal(iso)
 }
 
