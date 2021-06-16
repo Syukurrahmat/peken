@@ -3,7 +3,7 @@ function addCart(e, dfl = 0 ,begin = false,cartlist=false){
     let id = e.closest('section').getAttribute('data-id')
     let stock = e.closest('section').getAttribute('data-stock')
     
-    if(stock==0) return notif('barang tidak tersedia')
+    if(stock<=0) return notif('barang tidak tersedia')
     
     let cart_p = e.parentElement
     cart_p.children[0].style.display = 'none'

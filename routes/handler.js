@@ -7,7 +7,7 @@ const randomstring = require("randomstring");
 module.exports = (app)=>{
     app.post('/cart',checkreferrer,async (req,res)=>{
         let stock = await Products.findOne({where:{id:req.body.id},attributes:['stock']})
-        if(stock.stock == 0) return
+        if(stock.stock <= 0) return
         
         let cart;
         if(!req.isAuthenticated()){
