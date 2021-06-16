@@ -73,13 +73,17 @@ async function alamat(){
 }
 
 async function savealamat(e){
-    
-    e.closest('.modal').querySelector('.closeModal').click()
-    document.querySelector('.editAlamat').innerHTML = 'Menyimpan ...'
-    document.querySelector('.editAlamat').classList.add('pointereventnone')
-    
-    let data =  Object.fromEntries(new FormData(e).entries())
+    let buttonAlamat = document.querySelector('.editAlamat')
+    let alamatdisp = document.querySelector('.alamatdisp')
 
+    e.closest('.modal').querySelector('.closeModal').click()
+    buttonAlamat.innerHTML = 'Menyimpan ...'
+    buttonAlamat.classList.add('pointereventnone')
+    alamatdisp.classList.add('loading')
+    
+    document.querySelectorAll('.rincianBay b').forEach(e=>e.classList.add('loading'))
+
+    let data =  Object.fromEntries(new FormData(e).entries())
 
     fetch('/setaddress',{
         method:'POST',
@@ -89,9 +93,10 @@ async function savealamat(e){
         body : JSON.stringify(data)
     }).then(res=>res.json()).then(res=>{
         if(res.status==='success'){
-            document.querySelector('.editAlamat').classList.remove('pointereventnone')
-            document.querySelector('.editAlamat').innerHTML = 'Ubah Alamat'
-            document.querySelector('.alamatdisp').innerText=res.strAddress
+            buttonAlamat.classList.remove('pointereventnone')
+            buttonAlamat.innerHTML = 'Ubah Alamat'
+            alamatdisp = res.strAddress
+            alamatdisp.classList.remove('loading')
             notif('Alamat baru berhasil disimpan')
             getOngkir()
         }
