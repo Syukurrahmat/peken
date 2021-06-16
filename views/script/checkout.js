@@ -73,9 +73,10 @@ async function alamat(){
 }
 
 async function savealamat(e){
-    e.querySelector('.button').value='Menyimpan ...'
-    e.querySelector('.button').disabled = true
-    document.querySelectorAll('.bgmodal , .closeModal').forEach(el=>el.classList.add('pointereventnone'))
+    
+    e.closest('.modal').querySelector('.closeModal').click()
+    document.querySelector('.editAlamat').innerHTML = 'Menyimpan ...'
+    document.querySelector('.editAlamat').classList.add('pointereventnone')
     
     let data =  Object.fromEntries(new FormData(e).entries())
 
@@ -88,13 +89,11 @@ async function savealamat(e){
         body : JSON.stringify(data)
     }).then(res=>res.json()).then(res=>{
         if(res.status==='success'){
-            e.closest('.modal').querySelector('.closeModal').classList.remove('pointereventnone')
-            e.closest('.modal').querySelector('.closeModal').click()
-            e.querySelector('.button').value='Simpan'
-            e.querySelector('.button').disabled = false
+            document.querySelector('.editAlamat').classList.remove('pointereventnone')
+            document.querySelector('.editAlamat').innerHTML = 'Ubah Alamat'
             document.querySelector('.alamatdisp').innerText=res.strAddress
+            notif('Alamat baru berhasil disimpan')
             getOngkir()
-            setTimeout(()=>notif('Alamat baru berhasil disimpan'),400)
         }
     })
     return false
