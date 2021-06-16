@@ -34,7 +34,7 @@ async function getdata(){
             if(e[i]==undefined) return section.remove()
             let element = section.querySelectorAll('b ,p ,.button')
             element[1].innerHTML = e[i].id
-            element[2].innerHTML = isoToDate(e[i].createdAt)
+            element[2].innerHTML = toFullTanggal(e[i].createdAt)
             element[4].innerHTML = status[e[i].status][0]
             element[4].className = status[e[i].status][1]
             element[6].innerHTML = toFullTanggal(e[i].deadline)
@@ -60,13 +60,6 @@ function toFullTanggal(dt){
     let jam = date.split(' ')[1].split('.').slice(0,2).join(':')
     return (`${jam} , ${tanggal}`);
 
-}
-
-function isoToDate(iso){
-    iso = iso.replace(' ','T')
-    iso += '.000Z'
-console.log(iso)
-    return toFullTanggal(iso)
 }
 
 async function detail(e){
