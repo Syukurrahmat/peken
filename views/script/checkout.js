@@ -79,7 +79,7 @@ async function savealamat(e){
 
     e.closest('.modal').querySelector('.closeModal').click()
     buttonAlamat.innerHTML = 'Menyimpan ...'
-    submitbutton.innerHTML = 'Menyimpan Alamat'
+    submitbutton.value = 'Menyimpan Alamat'
     buttonAlamat.classList.add('pointereventnone')
     submitbutton.classList.add('pointereventnone')
     alamatdisp.classList.add('loading')    
