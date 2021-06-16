@@ -135,16 +135,13 @@ async function getCityID_RO(id){
 
 function toFullTanggal(dt){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    let date = new Date(dt).toLocaleString()
 
-    let xbulan = new Date(dt).getMonth();
-    
-    let jam = String(new Date(dt).getHours()).padStart(2,0)
-    let menit = String(new Date(dt).getMinutes()).padStart(2,0)
-    let tanggal = new Date(dt).getDate();
-    let bulan = bulanArr[xbulan];
-    let tahun = new Date(dt).getFullYear();
-
-    return (`${jam}:${menit} , ${tanggal} ${bulan} ${tahun}`);
+    let tanggal = date.split(' ')[0].split('/')
+    tanggal[1] = bulanArr[tanggal[1]-1]
+    tanggal = tanggal.join(' ')
+    let jam = date.split(' ')[1].split('.').slice(0,2).join(':')
+    return (`${jam} , ${tanggal}`);
 
 }
 function num2rupiah(number){
