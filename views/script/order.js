@@ -65,7 +65,7 @@ function isoToDate(iso){
     iso.replace(' ','T')
     iso += '.000Z'
 
-    toFullTanggal(dt)
+    return toFullTanggal(iso)
 }
 
 async function detail(e){
