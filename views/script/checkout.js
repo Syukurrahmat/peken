@@ -94,7 +94,7 @@ async function savealamat(e){
         if(res.status==='success'){
             buttonAlamat.classList.remove('pointereventnone')
             buttonAlamat.innerHTML = 'Ubah Alamat'
-            alamatdisp = res.strAddress
+            alamatdisp.innerHTML = res.strAddress
             alamatdisp.classList.remove('loading')
             notif('Alamat baru berhasil disimpan')
             getOngkir()
