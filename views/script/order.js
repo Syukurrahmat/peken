@@ -52,7 +52,6 @@ async function getdata(){
 function toFullTanggal(dt){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
     let date = new Date(dt).toLocaleString()
-    console.log(date)
 
     let tanggal = date.split(' ')[0].split('/')
     tanggal[1] = bulanArr[tanggal[1]-1]
@@ -123,7 +122,7 @@ async function detail(e){
 
     element[1].innerHTML = status[data.status][0]
     element[1].classList.add(status[data.status][1])
-    element[3].innerHTML = isoToDate(data.createdAt)
+    element[3].innerHTML = toFullTanggal(data.createdAt)
     element[5].innerHTML = (data.accepted)? toFullTanggal(data.accepted) : 'Barang belum diterima'  
     element[6].innerHTML = data.address.strAddress.split('|')[0]
     element[7].innerHTML = data.address.strAddress.split('|')[1]
