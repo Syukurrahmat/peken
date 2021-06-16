@@ -8,9 +8,6 @@ const passport		= require('passport');
 const flash         = require('connect-flash');
 const port          = process.env.PORT || 5000;
 const dotenv        = require('dotenv');
-const { Products } = require('./config/db');
-
-
 
 dotenv.config();
 app.set('views', path.join(__dirname, '/views'))
@@ -41,12 +38,6 @@ require('./routes/login')(app)
 require('./routes/page')(app)
 require('./routes/getdata')(app)
 require('./routes/handler')(app)
-
-ff()
-async function ff(){
-    let data = await Products.findOne({where:{stock:-15}})
-    console.log(data)
-}
 
 
 app.listen(port, () => {
