@@ -52,9 +52,8 @@ module.exports = (app)=>{
         if(req.cookies['bayar'] !== id ) return res.status(404).send('Not found');
 
         let data = await Order.findOne({where:{id:req.params.id}})
-        let deadline = toFullTanggal(data.deadline)
         let bayar  = num2rupiah(data.bayar.totBayar)
 
-        res.render('bayar' , {data , deadline , bayar})
+        res.render('bayar' , {data , bayar})
     })
 }
