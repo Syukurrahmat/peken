@@ -408,6 +408,9 @@ footer .sosmed img{
 .cart span:empty{
     visibility: hidden;
 }
+.cart span:empty .sumCart{
+    padding: 0;
+}
 
 /* ======== HOME PAGE======== */
 

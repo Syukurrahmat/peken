@@ -99,7 +99,7 @@ async function savealamat(e){
             buttonAlamat.innerHTML = 'Ubah Alamat'
             alamatdisp[0] = res.strAddress.split(' | ')[0]
             alamatdisp[1] = res.strAddress.split(' | ')[1]
-            alamatdisp.forEach(el=>el.classList.add('loading'))    
+            alamatdisp.forEach(el=>el.classList.remove('loading'))    
             notif('Alamat baru berhasil disimpan')
             getOngkir()
         }
