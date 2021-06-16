@@ -7,7 +7,6 @@ function toFullTanggal(dt){
     tanggal = tanggal.join(' ')
     let jam = date.split(' ')[1].split('.').slice(0,2).join(':')
     return (`${jam} , ${tanggal}`);
-
 }
 
 let deadline = document.querySelector('.deadline')
