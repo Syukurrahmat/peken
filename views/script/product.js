@@ -46,12 +46,12 @@ async function getProduct(offset,many,begin=false){
         element[4].innerHTML = data[i].note
         element[5].innerHTML = num2rupiah(data[i].price)
         
-        if(data[i].stock<=0)e.classList.add('soldout')
         if(data[i].oncart) addCart(element[6],data[i].oncart,true)
         
         setTimeout(()=>{
             element[1].classList.toggle('loadimage')
             setTimeout(()=>element[1].classList.toggle('loadimage'),600)
+            if(data[i].stock<=0)e.classList.add('soldout')
             unloading(e)
         },i*100+200)
     });    

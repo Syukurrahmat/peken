@@ -8,8 +8,8 @@ const passport		= require('passport');
 const flash         = require('connect-flash');
 const port          = process.env.PORT || 5000;
 const dotenv        = require('dotenv');
-
 dotenv.config();
+
 app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'ejs')
@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(cookieParser())
 app.use(express.json());
 
-
 app.use(session({
     secret: "verygoodsecret",
 	resave: true,
@@ -26,19 +25,14 @@ app.use(session({
     cookie: { maxAge: 30*24*60*60*1000 },
 }));
 
-
-
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
 require('./routes/login')(app)
 require('./routes/page')(app)
 require('./routes/getdata')(app)
 require('./routes/handler')(app)
-
 
 app.listen(port, () => {
     console.log(`App berjalan pada port ${port}`)
