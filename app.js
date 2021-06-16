@@ -39,6 +39,7 @@ require('./routes/page')(app)
 require('./routes/getdata')(app)
 require('./routes/handler')(app)
 
+
 app.listen(port, () => {
     console.log(`App berjalan pada port ${port}`)
 })
