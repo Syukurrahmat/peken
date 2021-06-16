@@ -51,7 +51,7 @@ async function getdata(){
 
 function toFullTanggal(dt){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    let date = new Date(dt).toLocaleString()
+    let date = new Date(new Date(dt).toISOString()).toLocaleString()
 
     let tanggal = date.split(' ')[0].split('/')
     tanggal[1] = bulanArr[tanggal[1]-1]
