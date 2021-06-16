@@ -135,7 +135,8 @@ async function getCityID_RO(id){
 
 function toFullTanggal(dt){
     let bulanArr = ['Januari', 'Februari', 'Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    let date = new Date(new Date(dt).toISOString()).toLocaleString()
+    let date = new Date(dt).toISOString()
+    console.log(date)
 
     let tanggal = date.split(' ')[0].split('/')
     tanggal[1] = bulanArr[tanggal[1]-1]
